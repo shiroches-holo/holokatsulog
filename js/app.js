@@ -419,14 +419,15 @@ async function loadMember(memberId) {
 
   try {
 
-
     // ✅ 仮で色先に変える（重要）
     const member = members.find(m => String(m.memberId) === memberId);
-
+    
     // ✅ 契約解除は非表示
     if (!member || member.memberStatus === "terminated") {
       return;
     }
+
+    const dataId = member.dataId;
 
     if (member) {
       const root = document.documentElement;
