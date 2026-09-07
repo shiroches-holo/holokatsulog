@@ -24,7 +24,7 @@ async function loadMembers() {
     buildMemberList();
 
     const lastMember = localStorage.getItem("selectedMember");
-    const memberId = lastMember || members[0].id;
+    const memberId = lastMember || members[0].memberId;
 
     loadMember(memberId);
 
@@ -100,7 +100,7 @@ document.getElementById("checkAll").addEventListener("click", () => {
     const id = tr.dataset.id;
     if (id) {
       localStorage.setItem(
-        `${currentMember.id}_${id}`,
+        `${currentMember.memberId}_${id}`,
         true
       );
     }
@@ -117,7 +117,7 @@ document.getElementById("uncheckAll").addEventListener("click", () => {
     const id = tr.dataset.id;
     if (id) {
       localStorage.setItem(
-        `${currentMember.id}_${id}`,
+        `${currentMember.memberId}_${id}`,
         false
       );
     }
@@ -421,7 +421,7 @@ async function loadMember(memberId) {
 
 
     // ✅ 仮で色先に変える（重要）
-    const member = members.find(m => String(m.id) === memberId);
+    const member = members.find(m => String(m.memberId) === memberId);
 
     // ✅ 契約解除は非表示
     if (!member || member.memberStatus === "terminated") {
@@ -504,7 +504,7 @@ function buildMemberList() {
   // ✅ お気に入り
   members.forEach(member => {
 
-    const isFav = localStorage.getItem("fav_" + member.id) === "true";
+    const isFav = localStorage.getItem("fav_" + member.memberId) === "true";
     if (!isFav) return;
 
     const div = createMemberCard(member);
@@ -559,12 +559,12 @@ function createMemberCard(member) {
   const div = document.createElement("div");
   div.className = "member-card";
 
-  div.dataset.id = member.id;
+  div.dataset.id = member.memberId;
 
   const isFav =
-    localStorage.getItem("fav_" + member.id) === "true";
+    localStorage.getItem("fav_" + member.memberId) === "true";
 
-  if (member.id === currentMember?.id) {
+  if (member.memberId === currentMember?.memberId) {
     div.classList.add("selected");
   }
 
@@ -582,8 +582,8 @@ function createMemberCard(member) {
 
   // ✅ クリック
   div.onclick = () => {
-    localStorage.setItem("selectedMember", member.id);
-    loadMember(member.id);
+    localStorage.setItem("selectedMember", member.memberId);
+    loadMember(member.memberId);
     document.getElementById("memberModal").style.display = "none";
   };
 
@@ -593,7 +593,7 @@ function createMemberCard(member) {
     btn.onclick = (e) => {
       e.stopPropagation();
 
-      const key = "fav_" + member.id;
+      const key = "fav_" + member.memberId;
       const current = localStorage.getItem(key) === "true";
 
       localStorage.setItem(key, !current);
@@ -620,7 +620,7 @@ document.getElementById("memberSearch").addEventListener("input", e => {
 
     const memberId = card.dataset.id;
 
-    const member = members.find(m => String(m.id) === memberId);
+    const member = members.find(m => String(m.memberId) === memberId);
     if (!member) return;
 
     // ✅ 検索対象まとめる
