@@ -1,0 +1,421 @@
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+	<title>ホロ活ログ</title>
+
+	<!-- Google tag (gtag.js) -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-L57WD1Z8SS"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag() { dataLayer.push(arguments); }
+		gtag('js', new Date());
+
+		gtag('config', 'G-L57WD1Z8SS');
+	</script>
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+	<main>
+		<header id="appHeader">
+
+			<div class="logo-row">
+				<div class="logo-area">
+					<img src="images/【ヘッダーロゴ】ホロ活ログ-背景透過.png" alt="ホロ活ログ" class="header-logo">
+				</div>
+
+				<div class="header-note-top">
+					※非公式ファンメイドサイト
+				</div>
+			</div>
+
+			<button id="memberSelectBtn" class="member-selector">
+
+				<img id="memberIcon" class="member-icon" src="" alt="">
+
+				<div class="member-info">
+					<div id="memberName" class="member-header-name">
+						読み込み中...
+					</div>
+
+					<div id="memberFanName" class="member-fanname">
+					</div>
+				</div>
+
+			</button>
+
+		</header>
+
+		<div id="loading">
+			<div class="spinner"></div>
+			読み込み中...
+		</div>
+
+		<!-- タブフィルタ -->
+		<div class="type-tabs">
+			<button class="tab active" data-type="all">全て</button>
+			<button class="tab" data-type="archive">アーカイブ</button>
+			<button class="tab" data-type="video">動画</button>
+			<button class="tab" data-type="short">Shorts</button>
+		</div>
+
+		<!-- ✅ stats 横並びエリア -->
+		<div id="stats"></div>
+
+		<div class="search-bar">
+
+			<input type="text" id="search" placeholder="🔍 キーワードで検索">
+
+			<button id="filterOpenBtn" class="filter-btn">
+				⚙ 条件
+			</button>
+
+		</div>
+
+		<div id="filterModal" class="modal">
+
+			<div class="modal-content">
+
+				<div class="modal-header">
+					<h2>検索条件</h2>
+					<span id="closeFilterModal" class="close-btn">×</span>
+				</div>
+
+				<div id="filterContent">
+					<div class="controls-left">
+
+						<select id="filterStatus">
+							<option value="all">すべて</option>
+							<option value="watched">視聴済み</option>
+							<option value="unwatched">未視聴</option>
+						</select>
+
+						<select id="sort">
+							<option value="new">公開日（新→旧）</option>
+							<option value="old">公開日（旧→新）</option>
+							<option value="title_asc">タイトル（昇順）</option>
+							<option value="title_desc">タイトル（降順）</option>
+							<option value="long">時間（長い順）</option>
+							<option value="short">時間（短い順）</option>
+						</select>
+
+						<select id="durationLimit">
+							<option value="">全時間</option>
+							<option value="30">30分以内</option>
+							<option value="60">1時間以内</option>
+							<option value="120">2時間以内</option>
+							<option value="180">3時間以内</option>
+							<option value="240">4時間以内</option>
+							<option value="300">5時間以内</option>
+							<option value="360">6時間以内</option>
+							<option value="420">7時間以内</option>
+							<option value="480">8時間以内</option>
+							<option value="540">9時間以内</option>
+							<option value="600">10時間以内</option>
+							<option value="660">11時間以内</option>
+							<option value="720">12時間以内</option>
+						</select>
+
+						<div class="range-group">
+							<div class="range-group">
+								<input type="text" id="dateFrom" placeholder="年/月/日" onfocus="
+						this.type='date';
+						setTimeout(() => this.showPicker && this.showPicker(), 0);
+					" onblur="
+						if(!this.value)this.type='text'
+					">
+
+								<span>～</span>
+
+								<input type="text" id="dateTo" placeholder="年/月/日" onfocus="
+						this.type='date';
+						setTimeout(() => this.showPicker && this.showPicker(), 0);
+					" onblur="
+						if(!this.value)this.type='text'
+					">
+							</div>
+						</div>
+
+						<div class="btn-group">
+							<button id="resetAll">条件リセット</button>
+						</div>
+
+					</div>
+
+					<div class="controls-right">
+						<button id="toTop">🔼</button>
+						<button id="toBottom">🔽</button>
+						<button id="checkAll">表示全☑</button>
+						<button id="uncheckAll">全☑解除</button>
+					</div>
+					<details id="playlistBox">
+						<summary>再生リスト選択</summary>
+						<input type="text" id="playlistSearch" placeholder="再生リスト検索">
+
+						<button id="playlistAll">全て✔</button>
+						<button id="playlistClear">全て解除</button>
+
+						<div id="playlistFilterArea"></div>
+					</details>
+				</div>
+
+			</div>
+
+		</div>
+		<div id="memberModal" class="modal">
+
+			<div class="modal-content">
+
+				<div class="modal-header">
+					<h2>ホロメンを選択</h2>
+					<span id="closeMemberModal" class="close-btn">×</span>
+				</div>
+
+				<input id="memberSearch" placeholder="🔍️名前で検索">
+
+				<h3 id="favTitle">⭐️ お気に入り</h3>
+				<div id="favoriteMembers" class="member-grid"></div>
+
+				<h3>すべてのホロメン</h3>
+				<div id="allMembers" class="member-grid"></div>
+
+			</div>
+
+		</div>
+
+		
+		<!-- ✅ controls は1個だけ -->		
+		<div class="playlist-header">
+
+			<!-- ヘルプ［概要・使い方・バージョン情報・制作者］ -->
+			<!--
+			<button id="helpBtn">❓ヘルプ</button>
+			-->
+			<div id="helpModal">
+				<div class="modal-content">
+
+					<div class="tab-buttons">
+						<button data-tab="about">概要</button>
+						<button data-tab="howto">使い方</button>
+						<button data-tab="version">バージョン</button>
+						<button data-tab="author">制作者</button>
+					</div>
+
+					<div class="tab-content">
+
+						<div class="tab-panel" id="about">
+							<h3>概要</h3>
+							<p>
+								ホロライブ所属メンバーの配信アーカイブを管理するための非公式ツールです。<br>
+								視聴済みチェックや検索・並び替え・フィルタ機能で効率よく管理できます。<br>
+								動画時間や視聴時間の表示も行っており、
+								ご自身の視聴状況を確認することが可能です。
+							</p>
+
+							<p style="margin-top:12px;">
+								<strong>※注意</strong><br>
+								データはYouTubeのライブ一覧をもとに取得しています。<br>
+								一部、配信以外の動画（オリ曲・歌・Shortsなど）が含まれる場合があります。<br>
+								配信時間のみを確認したい場合は、
+								検索機能や再生リストでの絞り込みをご利用ください。<br><br>
+
+								動画数が多い場合、
+								初回読み込みや検索・並び替え時に表示まで時間がかかる場合があります。
+							</p>
+						</div>
+
+						<div class="tab-panel" id="howto" style="display:none;">
+							<h3>使い方</h3>
+
+							<ul>
+								<li>
+									<strong>タイトル検索：</strong>
+									「タイトル検索」欄で動画タイトルを絞り込みできます
+								</li>
+
+								<li>
+									<strong>視聴状態：</strong>
+									「すべて / 視聴済み / 未視聴」で表示切替できます
+								</li>
+
+								<li>
+									<strong>並び替え：</strong>
+									「公開日（新→旧）」などから公開日・タイトル・動画時間順に変更できます
+								</li>
+
+								<li>
+									<strong>時間フィルタ：</strong>
+									「全時間」から動画時間で絞り込みできます
+								</li>
+
+								<li>
+									<strong>公開日範囲：</strong>
+									「年/月/日」から公開日の期間指定ができます
+								</li>
+
+								<li>
+									<strong>再生リスト選択：</strong>
+									再生リストごとの表示切替や検索ができます
+								</li>
+
+								<li>
+									<strong>視聴管理：</strong>
+									チェック☑を付けることで視聴済み管理ができます
+								</li>
+
+								<li>
+									<strong>一括操作：</strong><br>
+									「表示全☑」で表示中の動画をまとめてチェックできます<br>
+									「全☑解除」で一括解除できます
+								</li>
+
+								<li>
+									<strong>移動ボタン：</strong>
+									「🔼」でページ上部、「🔽」でページ下部へ移動できます
+								</li>
+
+								<li>
+									<strong>条件リセット：</strong>
+									「条件リセット」で検索条件を初期状態に戻せます
+								</li>
+
+								<li>
+									<strong>データ移行：</strong>
+									「エクスポート / インポート」で視聴データを保存・復元できます
+								</li>
+
+								<li>
+									<strong>リンク：</strong>
+									動画タイトルや再生リスト名を押すと、
+									YouTubeを別タブで開きます
+								</li>
+							</ul>
+
+							<p style="margin-top:12px;">
+								<strong>※視聴データについて</strong><br>
+								視聴チェックのデータは、ご利用中のブラウザごとに保存されます。<br>
+								別端末・別ブラウザではデータは引き継がれません。<br><br>
+
+								データを移行したい場合は、
+								「エクスポート / インポート」機能をご利用ください。
+							</p>
+						</div>
+						<div class="tab-panel" id="version" style="display:none;">
+							<h3>バージョン</h3>
+							<p id="versionText"></p>
+							<h4>更新履歴</h4>
+							<div class="version-item">
+								<div class="version-header">
+									<strong>v1.1.0</strong>
+									<span class="date">（2026/05/19）</span>
+								</div>
+
+								<ul class="version-list">
+									<li>スマホUI追加</li>
+									<li>全体のUI改善</li>
+								</ul>
+							</div>
+
+							<div class="version-item">
+								<div class="version-header">
+									<strong>v1.0.0</strong>
+									<span class="date">（2026/05/15）</span>
+								</div>
+
+								<ul class="version-list">
+									<li>初版リリース</li>
+								</ul>
+							</div>
+						</div>
+						<div class="tab-panel" id="author" style="display:none;">
+							<h3>制作者</h3>
+
+							<p>
+								<strong>白ちぇす</strong><br>
+								X（旧Twitter）:
+								<a href="https://x.com/ches_hafu" target="_blank">
+									@ches_hafu
+								</a>
+							</p>
+							<p>
+								本ツールは個人による非公式ファンツールです。<br>
+								不具合報告・ご要望などがありましたら、上記XアカウントへのリプライまたはDMにてご連絡ください。
+							</p>
+							</p>
+							<strong>▼ 不具合報告の際のお願い</strong><br>
+							以下の内容を記載いただけると助かります：<br><br>
+
+							・発生している現象（例：表示が崩れる / チェックが保存されない など）<br>
+							・操作手順（どの操作をしたときに発生したか）<br>
+							・使用環境（スマホ / PC、ブラウザなど）<br>
+							</p>
+							<p>
+								※本ツールはホロライブ公式および関連団体とは一切関係ありません。
+							</p>
+						</div>
+					</div>
+
+					<button id="closeHelp">閉じる</button>
+
+				</div>
+			</div>
+		</div>
+
+		<div class="list-header">
+
+			<div id="message"></div>
+
+			<p>動画一覧</p>
+
+			<!-- ラジオボタン -->
+			<div class="view-toggle">
+				<label>
+					<input type="radio" name="view" value="table" checked>
+					横
+				</label>
+
+				<label>
+					<input type="radio" name="view" value="card">
+					縦
+				</label>
+			</div>
+
+			<details class="data-transfer">
+				<summary>視聴☑データ移行</summary>
+				<button id="exportBtn">エクスポート</button>
+				<button id="importBtn">インポート</button>
+				<input type="file" id="importFile" style="display:none">
+				<div class="notice">
+					※データは端末のブラウザ毎に保存されます
+				</div>
+			</details>
+		</div>
+		<div class="table-wrapper">
+			<table id="list">
+				<thead>
+					<tr>
+						<th>公開日</th>
+						<th>タイトル</th>
+						<th>時間</th>
+						<th>視聴済み</th>
+						<th>再生リスト</th>
+					</tr>
+				</thead>
+				<tbody></tbody>
+			</table>
+
+
+
+			<!-- JS -->
+			<script src="js/config.js"></script>
+			<script src="js/util.js"></script>
+			<script src="js/render.js"></script>
+			<script src="js/app.js"></script>
+	</main>
+
+</body>
+
+</html>
