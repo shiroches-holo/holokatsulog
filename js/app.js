@@ -778,5 +778,6 @@ document
       }
 
     }
-
   );
+  
+initNavigation();
