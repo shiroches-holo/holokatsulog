@@ -76,7 +76,9 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   document.getElementById("versionText").textContent =
     `v${APP_VERSION}`;
-
+  
+  initNavigation();
+  
 });
 
 // ✅ イベント
@@ -779,5 +781,4 @@ document
 
     }
   );
-  
-initNavigation();
+
