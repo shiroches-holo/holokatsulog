@@ -776,4 +776,15 @@ tr:hover {
   cursor: pointer;
 }
 
+/* =========================
+   Page Switch
+========================= */
+
+.page {
+  display: none;
+}
+
+.page.active {
+  display: block;
+}
 
