@@ -8,10 +8,12 @@ function updateStats(filtered) {
   filtered.forEach(x => {
     totalSec += x.durationSec;
 
-    if (
-      localStorage.getItem(
-        `${currentMember.id}_${x.videoId}`
-      ) === "true"
+  const watchLog =
+    getWatchLog(x.videoId);
+  
+  if (
+      ["watched", "realtime", "releaseday"]
+        .includes(watchLog.status)
     ) {
       watched++;
       watchedSec += x.durationSec;
@@ -183,9 +185,13 @@ function render() {
 
 
     // 視聴状態
-    const watched = localStorage.getItem(
-      `${currentMember.id}_${item.videoId}`
-    ) === "true";
+    const watchLog =
+      getWatchLog(item.videoId);
+    
+    const watched =
+      ["watched", "realtime", "releaseday"]
+        .includes(watchLog.status);
+    
     if (status === "watched" && !watched) return false;
     if (status === "unwatched" && watched) return false;
 
@@ -216,20 +222,46 @@ function render() {
   if (sort === "short") filtered.sort((a, b) => a.durationSec - b.durationSec);
 
   // 描画
-  const viewMode = getViewMode();
-
-  const thead = document.querySelector("#list thead");
-  thead.style.display = (viewMode === "card") ? "none" : "";
 
   filtered.forEach(item => {
     const tr = document.createElement("tr");
     tr.dataset.id = item.videoId;
 
-    const checked = localStorage.getItem(
-      `${currentMember.id}_${item.videoId}`
-    ) === "true";
+    const watchLog =
+      getWatchLog(item.videoId);
 
-    if (viewMode === "card") {
+    let statusText = "未視聴";
+    let statusClass = "status-unwatched";
+    let dateText = "-";
+    
+    switch (watchLog.status) {
+    
+      case "watched":
+        statusText = "視聴済み";
+        statusClass = "status-watched";
+        dateText = watchLog.date || "-";
+        break;
+    
+      case "realtime":
+        statusText = "リアタイ";
+        statusClass = "status-realtime";
+        dateText = watchLog.date || "-";
+        break;
+    
+      case "releaseday":
+        statusText = "公開日視聴";
+        statusClass = "status-releaseday";
+        dateText = watchLog.date || "-";
+        break;
+    
+      case "partial":
+        statusText = "途中";
+        statusClass = "status-partial";
+        break;
+    
+    }
+
+    
 
       tr.innerHTML = `
         <td colspan="5">
@@ -261,49 +293,25 @@ function render() {
         }
               </div>
               
-              <!-- 視聴済み✅ -->
-              <div class="check-area">
-                視聴済み <input type="checkbox" ${checked ? "checked" : ""}>
+              <div class="watch-area">
+              
+                <div
+                  class="watch-status ${statusClass}"
+                  data-videoid="${item.videoId}">
+                  ${statusText}
+                </div>
+              
+                <div class="watch-date">
+                  ${dateText}
+                </div>
+              
               </div>
-
+              
             </div>
 
           </div>
         </td>
-      `;
-
-    } else {
-
-      tr.innerHTML = `
-        <td>${formatDate(item.publishedAt)}</td>
-        <td>
-          <a href="https://www.youtube.com/watch?v=${item.videoId}" target="_blank">
-            ${item.title}
-          </a>
-        </td>
-        <td class="time-cell">${formatDuration(item.durationSec)}</td>
-        <td class="check-cell">
-          <input type="checkbox" ${checked ? "checked" : ""}>
-        </td>
-        <td>
-          ${item.playlistUrl
-          ? `<a href="${item.playlistUrl}" target="_blank">${item.playlistName}</a>`
-          : item.playlistName
-        }
-        </td>
-      `;
-    }
-
-    if (checked) tr.style.background = "#e6ffe6";
-
-    const cb = tr.querySelector("input");
-    cb.addEventListener("change", () => {
-      localStorage.setItem(
-        `${currentMember.id}_${item.videoId}`,
-        cb.checked
-      );
-      render();
-    });
+      `;    
 
     tbody.appendChild(tr);
   });
