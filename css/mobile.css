@@ -441,5 +441,7 @@
    
    .nav-btn.active {
      color: #2563eb;
+     background: #eaf2ff;
+     font-weight: bold;
    }
 }
