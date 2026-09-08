@@ -643,4 +643,211 @@ thead th {
 
   border: none;
 
-  border-
+  border-radius: 6px;
+
+  background: #e5e7eb;
+
+  cursor: pointer;
+
+}
+
+.data-note {
+
+  background: #fff7ed;
+
+  border-left: 4px solid #f97316;
+
+  padding: 10px;
+
+  border-radius: 6px;
+
+}
+
+/* =================================================================================
+   メンバー選択
+================================================================================= */
+
+.member-grid {
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(auto-fill, 70px);
+
+  gap: 12px;
+
+  justify-content: start;
+
+}
+
+.member-card {
+
+  position: relative;
+
+  width: 70px;
+
+}
+
+.member-card img {
+
+  width: 70px;
+  height: 70px;
+
+  object-fit: cover;
+
+  border-radius: 12px;
+
+}
+
+.member-name {
+
+  text-align: center;
+
+  font-size: 12px;
+
+  margin-top: 4px;
+
+  white-space: normal;
+
+  overflow: hidden;
+
+  display: -webkit-box;
+
+  -webkit-line-clamp: 2;
+
+  -webkit-box-orient: vertical;
+
+}
+
+.favorite-btn {
+
+  position: absolute;
+
+  top: -4px;
+  right: -4px;
+
+  background: white;
+
+  border: none;
+
+  border-radius: 50%;
+
+  font-size: 14px;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 2px 6px rgba(0,0,0,.2);
+
+}
+
+/* =================================================================================
+   ロゴ
+================================================================================= */
+
+.logo-row {
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  padding: 0 8px;
+
+  background: #fff;
+
+}
+
+.header-logo {
+
+  height: 56px;
+
+  width: auto;
+
+}
+
+.logo-area {
+
+  text-align: center;
+
+  background: #fff;
+
+}
+
+/* =================================================================================
+   ホロメンヘッダー
+================================================================================= */
+
+.member-selector {
+
+  width: 100%;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+
+  padding: 12px 16px;
+
+  border: none;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--member-color1),
+      var(--member-color2),
+      var(--member-color3)
+    );
+
+  cursor: pointer;
+
+}
+
+.member-icon {
+
+  width: 40px;
+  height: 40px;
+
+  border-radius: 50%;
+
+  object-fit: cover;
+
+  background: #fff;
+
+  flex-shrink: 0;
+
+}
+
+.member-info {
+
+  flex: 1;
+
+  text-align: left;
+
+}
+
+.member-header-name {
+
+  color: white;
+
+  font-size: 1.2rem;
+
+  font-weight: 700;
+
+}
+
+.fanmark {
+
+  margin-left: 6px;
+
+}
+
+.member-arrow {
+
+  color: rgba(255,255,255,.95);
+
+  font-size: 1.4rem;
+
+}
