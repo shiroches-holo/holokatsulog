@@ -1,1 +1,33 @@
 
+/* =================================================================================
+   💻 Desktop Only
+   1200px以上
+================================================================================= */
+
+@media (min-width: 1200px) {
+
+  /* コントロールを横一列 */
+  .controls-left {
+    display: flex;
+    flex: 1;
+    flex-wrap: nowrap;
+    gap: 8px;
+    align-items: center;
+  }
+
+  /* テーブル表示を優先 */
+  table {
+    width: 100%;
+  }
+
+  th,
+  td {
+    font-size: 15px;
+  }
+
+  /* テーブルホバー */
+  tr:hover {
+    background: #ffe4ec;
+  }
+
+}
