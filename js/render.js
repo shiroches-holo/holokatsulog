@@ -20,6 +20,8 @@ function updateStats(filtered) {
     }
   });
 
+  let currentVideo = null;
+  
   // ✅ 計算は最後 端数切り捨て
   const rate = total
     ? Math.floor((watched / total) * 1000) / 10
