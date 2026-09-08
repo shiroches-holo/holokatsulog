@@ -63,3 +63,8 @@ function getStatusLabel(status) {
       return "";
   }
 }
+
+// 視聴ログステータス
+getWatchLog(videoId)
+
+saveWatchLog(videoId, status, date)
