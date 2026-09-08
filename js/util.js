@@ -65,6 +65,21 @@ function getStatusLabel(status) {
 }
 
 // 視聴ログステータス
-getWatchLog(videoId)
+function getWatchLog(videoId) {
 
-saveWatchLog(videoId, status, date)
+  const key =
+    `watch_${currentMember.memberId}_${videoId}`;
+
+  const data =
+    localStorage.getItem(key);
+
+  if (!data) {
+    return {
+      status: "unwatched",
+      date: null
+    };
+  }
+
+  return JSON.parse(data);
+
+}
