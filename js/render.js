@@ -1,4 +1,4 @@
-console.log("render.js TEST 20260909-1452");
+console.log("render.js TEST 20260909-1454");
 
 let currentVideo = null;
 
@@ -435,8 +435,8 @@ function render() {
     tbody.appendChild(tr);
   });
 
-  /*updateStats(filtered);
-  updatePlaylistCount();*/
+  updateStats(filtered);
+  //updatePlaylistCount();
 
 console.timeEnd("render");
   
