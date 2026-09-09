@@ -445,7 +445,7 @@ async function loadMember(memberId) {
     const response = await fetch(`${API_URL}?member=${memberId}`);
     const json = await response.json();
 
-    console.log(json);
+    // console.log(json);
     
     currentMember = json.member;
     window.data = json.videos;
