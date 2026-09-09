@@ -546,9 +546,9 @@ function buildMemberList() {
 
       allArea.appendChild(section);
 
-      console.log(groupOrderMap);
-      console.log(Object.keys(groups));
-      console.log(Object.keys(groupOrderMap));
+      // console.log(groupOrderMap);
+      // console.log(Object.keys(groups));
+      // console.log(Object.keys(groupOrderMap));
 
     });
 
