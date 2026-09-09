@@ -296,7 +296,7 @@ function render() {
 
     if (!checkedPlaylists.includes(item.playlistName)) return false;
 
-
+/*
     // 視聴状態
     const watchLog =
       getWatchLog(item.videoId);
@@ -307,7 +307,7 @@ function render() {
     
     if (status === "watched" && !watched) return false;
     if (status === "unwatched" && watched) return false;
-
+*/
     // 日付
     /*const from = document.getElementById("dateFrom").value;
     const to = document.getElementById("dateTo").value;*/
