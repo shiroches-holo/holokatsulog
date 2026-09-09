@@ -198,12 +198,19 @@ function closeWatchModal() {
 
 function selectWatchStatus(status) {
 
-  console.log(
+  saveWatchLog(
     currentVideo.videoId,
-    status
+    {
+      status: status,
+      date: new Date()
+        .toISOString()
+        .slice(0, 10)
+    }
   );
 
   closeWatchModal();
+
+  render();
 
 }
 
