@@ -279,9 +279,6 @@ function render() {
   
   let filtered = window.data.filter(item => {
 
-  if (!filterByType(item))
-    return false;
-
   return true;
 });
   console.timeEnd("filter");
