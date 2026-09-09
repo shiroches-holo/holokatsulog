@@ -847,3 +847,5 @@ if (picker.showPicker) {
 } else {
   picker.click();
 }
+
+}
