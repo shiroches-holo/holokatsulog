@@ -1,4 +1,4 @@
-console.log("app.js TEST 20260909-1807");
+console.log("app.js TEST 20260909-1812");
 
 window.data = [];
 
@@ -840,6 +840,10 @@ picker.onchange = () => {
   render();
 };
 
-picker.showPicker?.();
+picker.focus();
 
+if (picker.showPicker) {
+  picker.showPicker();
+} else {
+  picker.click();
 }
