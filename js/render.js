@@ -521,7 +521,7 @@ function render() {
                 <div
                   class="watch-status ${statusClass}"
                   onclick="toggleWatchMenu('${item.videoId}')">
-                  ${statusText}
+                  ${statusText} ▼
                 </div>
                               
                 <div
