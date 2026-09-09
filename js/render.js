@@ -196,6 +196,17 @@ function closeWatchModal() {
     .classList.add("hidden");
 }
 
+function selectWatchStatus(status) {
+
+  console.log(
+    currentVideo.videoId,
+    status
+  );
+
+  closeWatchModal();
+
+}
+
 function openWatchModalById(videoId) {
 
   const item =
