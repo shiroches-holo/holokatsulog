@@ -331,7 +331,8 @@ function render() {
   if (sort === "long") filtered.sort((a, b) => b.durationSec - a.durationSec);
   if (sort === "short") filtered.sort((a, b) => a.durationSec - b.durationSec);
 
-  filtered = filtered.slice(0, 100);
+  // 表示の制限
+  // filtered = filtered.slice(0, 100);
   
   // 描画
 
