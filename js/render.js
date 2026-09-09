@@ -210,15 +210,6 @@ function selectWatchStatus(status) {
 
   }
   
-  function changeWatchDate(videoId) {
-  
-    console.log(
-      "change date",
-      videoId
-    );
-  
-  }
-
   // リアタイ・公開日視聴 → 配信日
   if (
     status === "realtime" ||
@@ -242,6 +233,15 @@ function selectWatchStatus(status) {
   closeWatchModal();
 
   render();
+
+}
+
+function changeWatchDate(videoId) {
+
+  console.log(
+    "change date",
+    videoId
+  );
 
 }
 
