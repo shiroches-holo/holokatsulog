@@ -866,6 +866,7 @@ tr:hover {
   transform: scale(0.96);
 }
 
+/*
 .watch-menu {
 
   position: absolute;
@@ -887,6 +888,14 @@ tr:hover {
 
   z-index: 1000;
 
+}*/
+
+.watch-menu {
+  position: fixed !important;
+  top: 200px !important;
+  left: 200px !important;
+  background: red !important;
+  z-index: 999999 !important;
 }
 
 .watch-menu.hidden {
