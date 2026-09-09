@@ -262,6 +262,21 @@ function render() {
   const status = document.getElementById("filterStatus").value;
   const sort = document.getElementById("sort").value;
 
+  const checkedPlaylists = Array.from(
+    document.querySelectorAll(
+      "#playlistFilterArea input:checked"
+    )
+  ).map(cb => cb.value);
+  
+  const from =
+    document.getElementById("dateFrom").value;
+  
+  const to =
+    document.getElementById("dateTo").value;
+  
+  const limit =
+    document.getElementById("durationLimit").value;
+  
   let filtered = window.data.filter(item => {
 
 
@@ -273,9 +288,9 @@ function render() {
     if (keyword && !item.title.toLowerCase().includes(keyword)) return false;
 
     // 再生リスト
-    const checkedPlaylists = Array.from(
+    /*const checkedPlaylists = Array.from(
       document.querySelectorAll("#playlistFilterArea input:checked")
-    ).map(cb => cb.value);
+    ).map(cb => cb.value);*/
 
     if (checkedPlaylists.length === 0) return false
 
@@ -294,15 +309,15 @@ function render() {
     if (status === "unwatched" && watched) return false;
 
     // 日付
-    const from = document.getElementById("dateFrom").value;
-    const to = document.getElementById("dateTo").value;
+    /*const from = document.getElementById("dateFrom").value;
+    const to = document.getElementById("dateTo").value;*/
     const itemDate = new Date(item.publishedAt);
 
     if (from && itemDate < new Date(from)) return false;
     if (to && itemDate > new Date(to)) return false;
 
     // 時間フィルタ(ドロップダウン)
-    const limit = document.getElementById("durationLimit").value;
+    // const limit = document.getElementById("durationLimit").value;
     if (limit) {
       const minutes = item.durationSec / 60;
       if (minutes > Number(limit)) return false;
@@ -314,7 +329,7 @@ function render() {
   console.timeEnd("filter");
   
   console.time("sort");
-  
+   
   // ソート
   if (sort === "new") filtered.sort((a, b) => new Date(b.publishedAt) - new Date(a.publishedAt));
   if (sort === "old") filtered.sort((a, b) => new Date(a.publishedAt) - new Date(b.publishedAt));
