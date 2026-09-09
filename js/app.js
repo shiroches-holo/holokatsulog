@@ -840,6 +840,8 @@ picker.onchange = () => {
   render();
 };
 
+console.log("picker", picker);
+console.log("showPicker", typeof picker.showPicker);
 picker.focus();
 
 if (picker.showPicker) {
