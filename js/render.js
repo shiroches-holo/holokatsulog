@@ -198,13 +198,35 @@ function closeWatchModal() {
 
 function selectWatchStatus(status) {
 
+  let date = null;
+
+  // 視聴済み → 今日
+  if (status === "watched") {
+
+    date =
+      new Date()
+        .toISOString()
+        .slice(0, 10);
+
+  }
+
+  // リアタイ・公開日視聴 → 配信日
+  if (
+    status === "realtime" ||
+    status === "releaseday"
+  ) {
+
+    date =
+      currentVideo.publishedAt
+        .slice(0, 10);
+
+  }
+
   saveWatchLog(
     currentVideo.videoId,
     {
       status: status,
-      date: new Date()
-        .toISOString()
-        .slice(0, 10)
+      date: date
     }
   );
 
