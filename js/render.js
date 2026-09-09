@@ -1,4 +1,4 @@
-console.log("render.js TEST 20260909-1454");
+console.log("render.js TEST 20260909-1457");
 
 let currentVideo = null;
 
@@ -8,7 +8,7 @@ function updateStats(filtered) {
   let watched = 0;
   let totalSec = 0;
   let watchedSec = 0;
-/*
+
   filtered.forEach(x => {
     totalSec += x.durationSec;
 
@@ -23,7 +23,7 @@ function updateStats(filtered) {
       watchedSec += x.durationSec;
     }
   });
- */
+ 
   // ✅ 計算は最後 端数切り捨て
   const rate = total
     ? Math.floor((watched / total) * 1000) / 10
