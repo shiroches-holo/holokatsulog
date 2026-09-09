@@ -1,4 +1,3 @@
-let currentType = "all";
 let currentVideo = null;
 
 // ✅ 統計
