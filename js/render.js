@@ -1,3 +1,5 @@
+console.time("render");
+
 let currentVideo = null;
 
 // ✅ 統計
@@ -455,4 +457,6 @@ function render() {
   updateStats(filtered);
   updatePlaylistCount();
 
+console.timeEnd("render");
+  
 }
