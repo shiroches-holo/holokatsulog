@@ -246,6 +246,8 @@ function openWatchModalById(videoId) {
 function render() {
   
   console.time("render");
+
+  console.time("filter");
   
   const tbody = document.querySelector("#list tbody");
   tbody.innerHTML = ""; // ←これも必要！
@@ -309,6 +311,10 @@ function render() {
     return true;
   });
 
+  console.timeEnd("filter");
+  
+  console.time("sort");
+  
   // ソート
   if (sort === "new") filtered.sort((a, b) => new Date(b.publishedAt) - new Date(a.publishedAt));
   if (sort === "old") filtered.sort((a, b) => new Date(a.publishedAt) - new Date(b.publishedAt));
@@ -318,6 +324,8 @@ function render() {
   if (sort === "short") filtered.sort((a, b) => a.durationSec - b.durationSec);
 
   filtered = filtered.slice(0, 100);
+
+  console.timeEnd("sort");
   
   // 描画
 
@@ -357,9 +365,7 @@ function render() {
         statusClass = "status-partial";
         break;
     
-    }
-
-    
+    }   
 
       tr.innerHTML = `
         <td colspan="5">
