@@ -816,45 +816,30 @@ function changeWatchDate(videoId) {
   if (watchLog.status !== "watched") {
     return;
   }
+const picker =
+  document.getElementById(
+    "watchDatePicker"
+  );
 
-  const input =
-    document.createElement("input");
+picker.value =
+  watchLog.date ||
+  new Date()
+    .toISOString()
+    .slice(0, 10);
 
-  input.type = "date";
+picker.onchange = () => {
 
-  input.style.position = "fixed";
-  input.style.left = "-9999px";
-
-  input.value =
-    watchLog.date ||
-    new Date()
-      .toISOString()
-      .slice(0, 10);
-
-  input.onchange = () => {
-
-    saveWatchLog(
-      videoId,
-      {
-        ...watchLog,
-        date: input.value
-      }
-    );
-
-    //input.remove();
-
-    render();
-  };
-
-  document.body.appendChild(input);
-  
-  input.click();
-  
-  if (typeof input.showPicker === "function") {
-    try {
-      input.showPicker();
-    } catch (e) {
-      // 無視
+  saveWatchLog(
+    videoId,
+    {
+      ...watchLog,
+      date: picker.value
     }
-  }
+  );
+
+  render();
+};
+
+picker.showPicker?.();
+
 }
