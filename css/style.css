@@ -857,19 +857,13 @@ tr:hover {
 }
 
 .watch-date {
-  font-size: 12px;
-  margin-top: 4px;
+  color: #6b7280;
 }
 
 .watch-date.editable {
 
-  cursor: pointer;
-
-  text-decoration: underline;
-
-  text-decoration-style: dashed;
-
   color: #2563eb;
+  cursor: pointer;
 
 }
 
