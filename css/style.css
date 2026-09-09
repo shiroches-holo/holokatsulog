@@ -103,7 +103,7 @@ h1 {
 table {
   background: white;
   border-radius: 10px;
-  overflow: hidden;
+  overflow: visible;
   box-shadow: 0 6px 16px rgba(255, 150, 180, 0.25);
   width: 100%;
   border-collapse: collapse;
