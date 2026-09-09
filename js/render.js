@@ -1,3 +1,5 @@
+console.log("render.js TEST 20260909-1442");
+
 let currentVideo = null;
 
 // ✅ 統計
