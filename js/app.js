@@ -34,18 +34,34 @@ async function loadMembers() {
     buildMemberList();
     console.timeEnd("buildMemberList");
 
-    const lastMember = localStorage.getItem("selectedMember");
-    const memberId = lastMember || members[0].memberId;
+    const lastMember =
+      localStorage.getItem("selectedMember");
+    
+    if (!lastMember) {
+    
+      document.getElementById("loading").style.display = "none";
+    
+      document.getElementById("memberModal").style.display =
+        "block";
+    
+      return;
+    }
+    
+    await loadMember(lastMember);
 
-    console.time("loadMember");
-    await loadMember(memberId);
-    console.timeEnd("loadMember");
-
-  } catch (err) {
-    console.error(err);
-  }
+    } catch (err) {
+    
+      console.error(err);
+    
+      document.getElementById("loading")
+        .style.display = "none";
+    
+      showMessage(
+        "読込失敗",
+        "error"
+      );
+    }
 }
-
 // -------------------- 共通関数 --------------------
 
 // 再生リスト件数表示
@@ -393,43 +409,6 @@ function createPlaylists() {
   updatePlaylistCount();
 }
 
-function applyMemberTheme() {
-
-  if (!currentMember) return;
-
-  const header =
-    document.getElementById(
-      "appHeader"
-    );
-
-  header.style.background =
-    `linear-gradient(
-      135deg,
-      ${currentMember.color1},
-      ${currentMember.color2},
-      ${currentMember.color3}
-    )`;
-
-
-  // ✅ ホロメンの名前
-  document.getElementById("memberName").innerHTML =
-    `${member.name} 
-     <span class="fanmark">${member.fanMark}</span>
-     ${getStatusLabel(member.memberStatus)}`;
-
-
-  // ✅ ファンネーム
-  /*
-  document.getElementById("memberFanName").textContent =
-    currentMember.fanName || "";
-  */
-
-  // ✅ youtubeアイコン
-  document.getElementById("memberIcon").src =
-    currentMember.channelIconUrl;
-
-}
-
 async function loadMember(memberId) {
 
   try {
@@ -439,10 +418,12 @@ async function loadMember(memberId) {
     
     // ✅ 契約解除は非表示
     if (!member || member.memberStatus === "terminated") {
+    
+      document.getElementById("loading")
+        .style.display = "none";
+    
       return;
     }
-
-    const dataId = member.dataId;
 
     if (member) {
       const root = document.documentElement;
@@ -600,12 +581,23 @@ function createMemberCard(member) {
   `;
 
   // ✅ クリック
-  div.onclick = () => {
-    localStorage.setItem("selectedMember", member.memberId);
-    loadMember(member.memberId);
-    document.getElementById("memberModal").style.display = "none";
+  div.onclick = async() => {
+  
+    localStorage.setItem(
+      "selectedMember",
+      member.memberId
+    );
+  
+    document.getElementById("memberModal")
+      .style.display = "none";
+  
+    document.getElementById("loading")
+      .style.display = "flex";
+  
+    await loadMember(member.memberId);
+  
   };
-
+  
   // ✅ ⭐
   const btn = div.querySelector(".favorite-btn");
   if (btn) {
