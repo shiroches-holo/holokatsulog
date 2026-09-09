@@ -244,14 +244,201 @@ function openWatchModalById(videoId) {
 }
 
 function render() {
-
+  
   console.time("render");
 
+  console.time("filter");
+  
+  const tbody = document.querySelector("#list tbody");
+  tbody.innerHTML = ""; // ←これも必要！
+
+  const playlistCheckboxes = document.querySelectorAll("#playlistFilterArea input");
+
+  if (playlistCheckboxes.length === 0) {
+    return; // まだロード中なので描画しない
+  }
+
+  const keyword = document.getElementById("search").value.toLowerCase();
+  const status = document.getElementById("filterStatus").value;
+  const sort = document.getElementById("sort").value;
+
+  const checkedPlaylists = Array.from(
+    document.querySelectorAll(
+      "#playlistFilterArea input:checked"
+    )
+  ).map(cb => cb.value);
+  
+  const from =
+    document.getElementById("dateFrom").value;
+  
+  const to =
+    document.getElementById("dateTo").value;
+  
+  const limit =
+    document.getElementById("durationLimit").value;
+  
   let filtered = window.data.filter(item => {
-    return true;
+
+  if (!filterByType(item))
+    return false;
+
+  return true;
+});
+  console.timeEnd("filter");
+  
+  console.time("sort");
+   
+  // ソート
+  if (sort === "new") filtered.sort((a, b) => new Date(b.publishedAt) - new Date(a.publishedAt));
+  if (sort === "old") filtered.sort((a, b) => new Date(a.publishedAt) - new Date(b.publishedAt));
+  if (sort === "title_asc") filtered.sort((a, b) => a.title.localeCompare(b.title));
+  if (sort === "title_desc") filtered.sort((a, b) => b.title.localeCompare(a.title));
+  if (sort === "long") filtered.sort((a, b) => b.durationSec - a.durationSec);
+  if (sort === "short") filtered.sort((a, b) => a.durationSec - b.durationSec);
+
+  filtered = filtered.slice(0, 100);
+
+  console.timeEnd("sort");
+  
+  // 描画
+
+  filtered.forEach(item => {
+    const tr = document.createElement("tr");
+    tr.dataset.id = item.videoId;
+
+    const watchLog =
+      getWatchLog(item.videoId);
+
+    let statusText = "未視聴";
+    let statusClass = "status-unwatched";
+    let dateText = "";
+    
+    switch (watchLog.status) {
+    
+      case "watched":
+        statusText = "視聴済み";
+        statusClass = "status-watched";
+        dateText = watchLog.date || "-";
+        break;
+    
+      case "realtime":
+        statusText = "リアタイ";
+        statusClass = "status-realtime";
+        dateText = watchLog.date || "-";
+        break;
+    
+      case "releaseday":
+        statusText = "公開日視聴";
+        statusClass = "status-releaseday";
+        dateText = watchLog.date || "-";
+        break;
+    
+      case "partial":
+        statusText = "途中";
+        statusClass = "status-partial";
+        break;
+    
+    }   
+
+      tr.innerHTML = `
+        <td colspan="5">
+          <div class="card">
+
+            <!-- サムネ -->
+            <div class="thumb">
+                <img src="https://img.youtube.com/vi/${item.videoId}/mqdefault.jpg" loading="lazy">
+            </div>
+            
+            <div class="card-content">
+
+            <div class="title">
+              <a href="https://www.youtube.com/watch?v=${item.videoId}" target="_blank">
+                ${item.title}
+              </a>
+            </div>
+  
+            <div>📅 ${formatDate(item.publishedAt)}</div>
+            <div>⏱ ${formatDuration(item.durationSec)}</div>
+           
+            <div class="playlist-row">
+
+              <!-- 再生リスト -->
+              <div class="playlist-text">
+                🎵 ${item.playlistUrl
+          ? `<a href="${item.playlistUrl}" target="_blank">${item.playlistName}</a>`
+          : item.playlistName
+        }
+              </div>
+              
+              <div class="watch-area">
+              
+                <div
+                  class="watch-status ${statusClass}"
+                  onclick="toggleWatchMenu('${item.videoId}')">
+                  ${statusText} ▼
+                </div>
+                              
+                <div
+                  class="watch-date ${watchLog.status === "watched" ? "editable" : ""}"
+                  onclick="changeWatchDate('${item.videoId}')">
+                  ${dateText}
+                </div>
+                
+                <div
+                  id="watch-menu-${item.videoId}"
+                  class="watch-menu hidden">
+                
+                  <div
+                    class="watch-menu-item"
+                    onclick="changeWatchStatus('${item.videoId}','unwatched')">
+                    未視聴
+                  </div>
+                
+                  <div
+                    class="watch-menu-item"
+                    onclick="changeWatchStatus('${item.videoId}','watched')">
+                    視聴済み
+                  </div>
+                
+                  <div
+                    class="watch-menu-item"
+                    onclick="changeWatchStatus('${item.videoId}','partial')">
+                    途中
+                  </div>
+                
+                  ${item.videoType === "ARCHIVE" ? `
+                    <div
+                      class="watch-menu-item"
+                      onclick="changeWatchStatus('${item.videoId}','realtime')">
+                      リアタイ
+                    </div>
+                  ` : ""}
+                
+                  ${(item.videoType === "VIDEO" ||
+                      item.videoType === "SHORT") ? `
+                    <div
+                      class="watch-menu-item"
+                      onclick="changeWatchStatus('${item.videoId}','releaseday')">
+                      公開日視聴
+                    </div>
+                  ` : ""}
+                
+                </div>
+              
+              </div>
+              
+            </div>
+
+          </div>
+        </td>
+      `;    
+
+    tbody.appendChild(tr);
   });
 
-  console.log(filtered.length);
+  updateStats(filtered);
+  updatePlaylistCount();
 
-  console.timeEnd("render");
+console.timeEnd("render");
+  
 }
