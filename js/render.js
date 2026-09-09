@@ -1,5 +1,3 @@
-console.time("render");
-
 let currentVideo = null;
 
 // ✅ 統計
@@ -246,6 +244,9 @@ function openWatchModalById(videoId) {
 }
 
 function render() {
+  
+  console.time("render");
+  
   const tbody = document.querySelector("#list tbody");
   tbody.innerHTML = ""; // ←これも必要！
 
@@ -316,6 +317,8 @@ function render() {
   if (sort === "long") filtered.sort((a, b) => b.durationSec - a.durationSec);
   if (sort === "short") filtered.sort((a, b) => a.durationSec - b.durationSec);
 
+  filtered = filtered.slice(0, 100);
+  
   // 描画
 
   filtered.forEach(item => {
