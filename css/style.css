@@ -855,3 +855,26 @@ tr:hover {
   font-size: 12px;
   font-weight: bold;
 }
+
+.watch-date {
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+.watch-date.editable {
+
+  cursor: pointer;
+
+  text-decoration: underline;
+
+  text-decoration-style: dashed;
+
+  color: #2563eb;
+
+}
+
+.watch-date.editable:hover {
+
+  color: #1d4ed8;
+
+}
