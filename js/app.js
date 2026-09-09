@@ -70,8 +70,6 @@ function showMessage(text, type = "success") {
 // -------------------- 初期読み込み --------------------
 document.addEventListener("DOMContentLoaded", async () => {
 
-  autoViewMode();
-
   await loadMembers();
 
   document.getElementById("versionText").textContent =
