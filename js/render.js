@@ -326,7 +326,39 @@ function changeWatchStatus(videoId, status) {
     }
   );
 
+  document
+    .querySelectorAll(".watch-menu")
+    .forEach(menu => {
+      menu.classList.add("hidden");
+  });
+  
   render();
+
+}
+
+function toggleWatchMenu(videoId) {
+
+  const menu =
+    document.getElementById(
+      `watch-menu-${videoId}`
+    );
+
+  if (!menu) return;
+
+  const isOpen =
+    !menu.classList.contains("hidden");
+
+  // 全部閉じる
+  document
+    .querySelectorAll(".watch-menu")
+    .forEach(m => {
+      m.classList.add("hidden");
+    });
+
+  // 元々閉じてたなら開く
+  if (!isOpen) {
+    menu.classList.remove("hidden");
+  }
 
 }
 
@@ -486,45 +518,57 @@ function render() {
               
               <div class="watch-area">
               
-              <select
-                class="watch-status-select ${statusClass}"
-                onchange="changeWatchStatus('${item.videoId}', this.value)">
-              
-                <option value="unwatched"
-                  ${watchLog.status === "unwatched" ? "selected" : ""}>
-                  未視聴
-                </option>
-              
-                <option value="watched"
-                  ${watchLog.status === "watched" ? "selected" : ""}>
-                  視聴済み
-                </option>
-              
-                <option value="partial"
-                  ${watchLog.status === "partial" ? "selected" : ""}>
-                  途中
-                </option>
-              
-                ${item.videoType === "ARCHIVE" ? `
-                  <option value="realtime"
-                    ${watchLog.status === "realtime" ? "selected" : ""}>
-                    リアタイ
-                  </option>
-                ` : ""}
-              
-                ${(item.videoType === "VIDEO" || item.videoType === "SHORT") ? `
-                  <option value="releaseday"
-                    ${watchLog.status === "releaseday" ? "selected" : ""}>
-                    公開日視聴
-                  </option>
-                ` : ""}
-              
-              </select>
-              
+                <div
+                  class="watch-status ${statusClass}"
+                  onclick="toggleWatchMenu('${item.videoId}')">
+                  ${statusText}
+                </div>
+                              
                 <div
                   class="watch-date ${watchLog.status === "watched" ? "editable" : ""}"
                   onclick="changeWatchDate('${item.videoId}')">
                   ${dateText}
+                </div>
+                
+                <div
+                  id="watch-menu-${item.videoId}"
+                  class="watch-menu hidden">
+                
+                  <div
+                    class="watch-menu-item"
+                    onclick="changeWatchStatus('${item.videoId}','unwatched')">
+                    未視聴
+                  </div>
+                
+                  <div
+                    class="watch-menu-item"
+                    onclick="changeWatchStatus('${item.videoId}','watched')">
+                    視聴済み
+                  </div>
+                
+                  <div
+                    class="watch-menu-item"
+                    onclick="changeWatchStatus('${item.videoId}','partial')">
+                    途中
+                  </div>
+                
+                  ${item.videoType === "ARCHIVE" ? `
+                    <div
+                      class="watch-menu-item"
+                      onclick="changeWatchStatus('${item.videoId}','realtime')">
+                      リアタイ
+                    </div>
+                  ` : ""}
+                
+                  ${(item.videoType === "VIDEO" ||
+                      item.videoType === "SHORT") ? `
+                    <div
+                      class="watch-menu-item"
+                      onclick="changeWatchStatus('${item.videoId}','releaseday')">
+                      公開日視聴
+                    </div>
+                  ` : ""}
+                
                 </div>
               
               </div>
