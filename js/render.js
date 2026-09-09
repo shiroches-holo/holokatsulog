@@ -241,28 +241,33 @@ function changeWatchDate(videoId) {
   const watchLog =
     getWatchLog(videoId);
 
-  if (
-    watchLog.status !== "watched"
-  ) {
+  if (watchLog.status !== "watched") {
     return;
   }
 
-  const newDate = prompt(
-    "視聴日を入力してください",
-    watchLog.date || ""
-  );
+  const input =
+    document.createElement("input");
 
-  if (!newDate) return;
+  input.type = "date";
 
-  saveWatchLog(
-    videoId,
-    {
-      status: watchLog.status,
-      date: newDate
-    }
-  );
+  input.value =
+    watchLog.date || "";
 
-  render();
+  input.onchange = () => {
+
+    saveWatchLog(
+      videoId,
+      {
+        status: watchLog.status,
+        date: input.value
+      }
+    );
+
+    render();
+
+  };
+
+  input.click();
 
 }
 
