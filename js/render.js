@@ -1,4 +1,4 @@
-console.log("render.js TEST 20260909-1457");
+console.log("render.js TEST 20260909-1458");
 
 let currentVideo = null;
 
@@ -436,7 +436,7 @@ function render() {
   });
 
   updateStats(filtered);
-  //updatePlaylistCount();
+  updatePlaylistCount();
 
 console.timeEnd("render");
   
