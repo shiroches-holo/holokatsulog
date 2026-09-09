@@ -375,7 +375,7 @@ function render() {
 
     let statusText = "未視聴";
     let statusClass = "status-unwatched";
-    let dateText = "-";
+    let dateText = "";
     
     switch (watchLog.status) {
     
