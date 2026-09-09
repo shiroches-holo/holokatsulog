@@ -445,7 +445,7 @@ function render() {
                 </div>
               
                 <div
-                  class="watch-date"
+                  class="watch-date ${watchLog.status === "watched" ? "editable" : ""}"
                   onclick="changeWatchDate('${item.videoId}')">
                   ${dateText}
                 </div>
