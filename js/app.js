@@ -18,11 +18,18 @@ async function loadMembers() {
 
   try {
 
+    console.time("fetch members");
+    
     const response = await fetch(`${API_URL}?type=members`);
     members = await response.json();
 
+    console.timeEnd("fetch members");
+
     // ✅ groups読み込み後に呼べるようにする
+    console.time("loadGroups");
     await loadGroups();
+    console.timeEnd("loadGroups");
+    
     console.time("buildMemberList");
     buildMemberList();
     console.timeEnd("buildMemberList");
