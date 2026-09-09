@@ -850,10 +850,12 @@ tr:hover {
 }
 
 .watch-status {
-  padding: 4px 8px;
-  border-radius: 8px;
+  padding: 4px 10px;
+  border-radius: 999px;
   font-size: 12px;
   font-weight: bold;
+  user-select: none;
+  cursor: pointer;
 }
 
 .watch-date {
@@ -872,3 +874,69 @@ tr:hover {
   color: #1d4ed8;
 
 }
+
+/* =========================
+   視聴状態メニュー
+========================= */
+
+.watch-area {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.watch-status {
+  cursor: pointer;
+}
+
+.watch-status:active {
+  transform: scale(0.96);
+}
+
+.watch-menu {
+
+  position: absolute;
+
+  top: calc(100% + 6px);
+
+  min-width: 110px;
+
+  background: #fff;
+
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+
+  overflow: hidden;
+
+  box-shadow:
+    0 8px 24px rgba(0, 0, 0, .15);
+
+  z-index: 1000;
+
+}
+
+.watch-menu.hidden {
+  display: none;
+}
+
+.watch-menu-item {
+
+  padding: 10px 12px;
+
+  font-size: 13px;
+
+  cursor: pointer;
+
+  white-space: nowrap;
+
+  transition: background .15s;
+
+}
+
+.watch-menu-item:hover {
+
+  background: #f3f4f6;
+
+}
+
