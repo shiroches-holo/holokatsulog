@@ -83,6 +83,8 @@ function showMessage(text, type = "success") {
 // -------------------- 初期読み込み --------------------
 document.addEventListener("DOMContentLoaded", async () => {
 
+  document.getElementById("loading").style.display = "flex";
+  
   await loadMembers();
 
   document.getElementById("versionText").textContent =
@@ -451,9 +453,6 @@ async function loadMember(memberId) {
       applyMemberPreview(member); // ✅ ここ追加（神ポイント）
 
     }
-
-    // ✅ そのあと表示
-    document.getElementById("loading").style.display = "flex";
 
     console.time("fetch member");
     
