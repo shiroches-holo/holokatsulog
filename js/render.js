@@ -282,6 +282,54 @@ function changeWatchDate(videoId) {
 
 }
 
+function changeWatchStatus(videoId, status) {
+
+  const item =
+    window.data.find(
+      v => v.videoId === videoId
+    );
+
+  if (!item) return;
+
+  let date = null;
+
+  // 視聴済み
+  if (status === "watched") {
+
+    const oldLog =
+      getWatchLog(videoId);
+
+    date =
+      oldLog.date ||
+      new Date()
+        .toISOString()
+        .slice(0, 10);
+  }
+
+  // リアタイ・公開日視聴
+  if (
+    status === "realtime" ||
+    status === "releaseday"
+  ) {
+
+    date =
+      item.publishedAt
+        .slice(0, 10);
+
+  }
+
+  saveWatchLog(
+    videoId,
+    {
+      status,
+      date
+    }
+  );
+
+  render();
+
+}
+
 function openWatchModalById(videoId) {
 
   const item =
@@ -438,11 +486,40 @@ function render() {
               
               <div class="watch-area">
               
-                <div
-                  class="watch-status ${statusClass}"
-                  onclick="openWatchModalById('${item.videoId}')">
-                  ${statusText}
-                </div>
+              <select
+                class="watch-status-select ${statusClass}"
+                onchange="changeWatchStatus('${item.videoId}', this.value)">
+              
+                <option value="unwatched"
+                  ${watchLog.status === "unwatched" ? "selected" : ""}>
+                  未視聴
+                </option>
+              
+                <option value="watched"
+                  ${watchLog.status === "watched" ? "selected" : ""}>
+                  視聴済み
+                </option>
+              
+                <option value="partial"
+                  ${watchLog.status === "partial" ? "selected" : ""}>
+                  途中
+                </option>
+              
+                ${item.videoType === "ARCHIVE" ? `
+                  <option value="realtime"
+                    ${watchLog.status === "realtime" ? "selected" : ""}>
+                    リアタイ
+                  </option>
+                ` : ""}
+              
+                ${(item.videoType === "VIDEO" || item.videoType === "SHORT") ? `
+                  <option value="releaseday"
+                    ${watchLog.status === "releaseday" ? "selected" : ""}>
+                    公開日視聴
+                  </option>
+                ` : ""}
+              
+              </select>
               
                 <div
                   class="watch-date ${watchLog.status === "watched" ? "editable" : ""}"
