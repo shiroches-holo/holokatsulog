@@ -1,4 +1,4 @@
-console.log("app.js TEST 20260909-1650");
+console.log("app.js TEST 20260909-1727");
 
 window.data = [];
 
@@ -808,3 +808,52 @@ document
     }
   );
 
+function changeWatchDate(videoId) {
+
+  const watchLog =
+    getWatchLog(videoId);
+
+  if (watchLog.status !== "watched") {
+    return;
+  }
+
+  const input =
+    document.createElement("input");
+
+  input.type = "date";
+
+  input.style.position = "fixed";
+  input.style.left = "-9999px";
+
+  input.value =
+    watchLog.date ||
+    new Date()
+      .toISOString()
+      .slice(0, 10);
+
+  input.onchange = () => {
+
+    saveWatchLog(
+      videoId,
+      {
+        ...watchLog,
+        date: input.value
+      }
+    );
+
+    input.remove();
+
+    render();
+  };
+
+  document.body.appendChild(input);
+  
+  input.click();
+  
+  if (typeof input.showPicker === "function") {
+    try {
+      input.showPicker();
+    } catch (e) {
+      // 無視
+    }
+  }
