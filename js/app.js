@@ -1,4 +1,4 @@
-console.log("app.js TEST 20260909-1727");
+console.log("app.js TEST 20260909-1736");
 
 window.data = [];
 
@@ -841,7 +841,7 @@ function changeWatchDate(videoId) {
       }
     );
 
-    input.remove();
+    //input.remove();
 
     render();
   };
