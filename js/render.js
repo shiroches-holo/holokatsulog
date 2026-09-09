@@ -209,6 +209,15 @@ function selectWatchStatus(status) {
         .slice(0, 10);
 
   }
+  
+  function changeWatchDate(videoId) {
+  
+    console.log(
+      "change date",
+      videoId
+    );
+  
+  }
 
   // リアタイ・公開日視聴 → 配信日
   if (
@@ -398,7 +407,9 @@ function render() {
                   ${statusText}
                 </div>
               
-                <div class="watch-date">
+                <div
+                  class="watch-date"
+                  onclick="changeWatchDate('${item.videoId}')">
                   ${dateText}
                 </div>
               
