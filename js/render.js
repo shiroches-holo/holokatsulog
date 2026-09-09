@@ -238,10 +238,31 @@ function selectWatchStatus(status) {
 
 function changeWatchDate(videoId) {
 
-  console.log(
-    "change date",
-    videoId
+  const watchLog =
+    getWatchLog(videoId);
+
+  if (
+    watchLog.status !== "watched"
+  ) {
+    return;
+  }
+
+  const newDate = prompt(
+    "視聴日を入力してください",
+    watchLog.date || ""
   );
+
+  if (!newDate) return;
+
+  saveWatchLog(
+    videoId,
+    {
+      status: watchLog.status,
+      date: newDate
+    }
+  );
+
+  render();
 
 }
 
