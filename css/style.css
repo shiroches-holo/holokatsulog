@@ -891,11 +891,18 @@ tr:hover {
 }*/
 
 .watch-menu {
-  position: fixed !important;
-  top: 200px !important;
-  left: 200px !important;
-  background: red !important;
-  z-index: 999999 !important;
+
+  position: absolute;
+
+  top: 0;
+  right: 120px;
+
+  min-width: 110px;
+
+  background: red;
+
+  z-index: 999999;
+
 }
 
 .watch-menu.hidden {
