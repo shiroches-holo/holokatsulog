@@ -1,4 +1,4 @@
-console.log("app.js TEST 20260909-1610");
+console.log("app.js TEST 20260909-1650");
 
 window.data = [];
 
@@ -42,7 +42,7 @@ async function loadMembers() {
     
       return;
     }
-    
+           
     await loadMember(lastMember);
 
     } catch (err) {
@@ -71,6 +71,25 @@ function updatePlaylistCount() {
 
 // -------------------- 描画(render) --------------------
 
+function setLoading(
+  text,
+  showSpinner = false
+) {
+
+  document.getElementById("loading")
+    .style.display = "flex";
+
+  document.getElementById("loadingText")
+    .textContent = text;
+
+  document.getElementById("loadingSpinner")
+    .classList.toggle(
+      "hidden",
+      !showSpinner
+    );
+
+}
+
 // メーセージボックス
 function showMessage(text, type = "success") {
   const el = document.getElementById("message");
@@ -95,15 +114,18 @@ function showMessage(text, type = "success") {
 // -------------------- 初期読み込み --------------------
 document.addEventListener("DOMContentLoaded", async () => {
 
-  document.getElementById("loading").style.display = "flex";
-  
+  setLoading(
+    "ホロメン情報取得中...",
+    false
+  );
+
   await loadMembers();
 
   document.getElementById("versionText").textContent =
     `v${APP_VERSION}`;
-  
+
   initNavigation();
-  
+
 });
 
 // ✅ イベント
@@ -407,6 +429,11 @@ function createPlaylists() {
 
 async function loadMember(memberId) {
 
+  setLoading(
+    "動画情報取得中...",
+    true
+  );
+
   try {
 
     // ✅ 仮で色先に変える（重要）
@@ -578,7 +605,7 @@ function createMemberCard(member) {
 
   // ✅ クリック
   div.onclick = async() => {
-  
+
     localStorage.setItem(
       "selectedMember",
       member.memberId
@@ -586,10 +613,7 @@ function createMemberCard(member) {
   
     document.getElementById("memberModal")
       .style.display = "none";
-  
-    document.getElementById("loading")
-      .style.display = "flex";
-  
+    
     await loadMember(member.memberId);
   
   };
