@@ -788,3 +788,35 @@ tr:hover {
   display: block;
 }
 
+/* =========================
+   視聴ログモーダル
+========================= */
+
+.hidden {
+  display: none;
+}
+
+#watchModal {
+  position: fixed;
+  inset: 0;
+
+  background: rgba(0,0,0,0.5);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  z-index: 9999;
+}
+
+#watchModal.hidden {
+  display: none;
+}
+
+#watchModal .modal-content {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+
+  min-width: 300px;
+}
