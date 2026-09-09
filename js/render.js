@@ -1,4 +1,4 @@
-console.log("render.js TEST 20260909-1445");
+console.log("render.js TEST 20260909-1452");
 
 let currentVideo = null;
 
@@ -247,19 +247,19 @@ function openWatchModalById(videoId) {
 
 function render() {
   console.count("render実行");
+ 
+  const playlistCheckboxes = document.querySelectorAll("#playlistFilterArea input");
+
+  if (playlistCheckboxes.length === 0) {
+    return; // まだロード中なので描画しない
+  }
   console.time("render");
 
   console.time("filter");
   
   const tbody = document.querySelector("#list tbody");
   tbody.innerHTML = ""; // ←これも必要！
-
-  const playlistCheckboxes = document.querySelectorAll("#playlistFilterArea input");
-
-  if (playlistCheckboxes.length === 0) {
-    return; // まだロード中なので描画しない
-  }
-
+  
   const keyword = document.getElementById("search").value.toLowerCase();
   const status = document.getElementById("filterStatus").value;
   const sort = document.getElementById("sort").value;
