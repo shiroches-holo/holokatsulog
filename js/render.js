@@ -1,3 +1,6 @@
+let currentType = "all";
+let currentVideo = null;
+
 // ✅ 統計
 function updateStats(filtered) {
   let total = filtered.length;
@@ -19,9 +22,7 @@ function updateStats(filtered) {
       watchedSec += x.durationSec;
     }
   });
-
-  let currentVideo = null;
-  
+ 
   // ✅ 計算は最後 端数切り捨て
   const rate = total
     ? Math.floor((watched / total) * 1000) / 10
@@ -150,6 +151,50 @@ function filterByType(video) {
   }
 
   return true;
+}
+
+function openWatchModal(item) {
+
+  currentVideo = item;
+
+  const container =
+    document.getElementById("watchOptions");
+
+  let options = [
+    ["unwatched", "未視聴"],
+    ["watched", "視聴済み"],
+    ["partial", "途中"]
+  ];
+
+  if (item.videoType === "ARCHIVE") {
+    options.splice(2, 0, ["realtime", "リアタイ"]);
+  }
+
+  if (
+    item.videoType === "VIDEO" ||
+    item.videoType === "SHORT"
+  ) {
+    options.splice(2, 0, ["releaseday", "公開日視聴"]);
+  }
+
+  container.innerHTML = options.map(x => `
+    <button
+      class="watch-option"
+      onclick="selectWatchStatus('${x[0]}')">
+      ${x[1]}
+    </button>
+  `).join("");
+
+  document
+    .getElementById("watchModal")
+    .classList.remove("hidden");
+}
+
+function closeWatchModal() {
+
+  document
+    .getElementById("watchModal")
+    .classList.add("hidden");
 }
 
 function render() {
@@ -299,7 +344,7 @@ function render() {
               
                 <div
                   class="watch-status ${statusClass}"
-                  data-videoid="${item.videoId}">
+                  onclick="openWatchModalById('${item.videoId}')">
                   ${statusText}
                 </div>
               
