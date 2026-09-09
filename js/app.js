@@ -1,4 +1,4 @@
-console.log("app.js TEST 20260909-1534");
+console.log("app.js TEST 20260909-1610");
 
 window.data = [];
 
@@ -9,26 +9,22 @@ let members = [];
 let groupsMaster = [];
 let currentType = "all"
 
-async function loadGroups() {
-  const res = await fetch(`${API_URL}?type=groups`);
-  groupsMaster = await res.json();
-}
-
 async function loadMembers() {
 
   try {
 
-    console.time("fetch members");
-    
-    const response = await fetch(`${API_URL}?type=members`);
-    members = await response.json();
-
-    console.timeEnd("fetch members");
-
-    // ✅ groups読み込み後に呼べるようにする
-    console.time("loadGroups");
-    await loadGroups();
-    console.timeEnd("loadGroups");
+  console.time("fetch all");
+  
+  const [membersRes, groupsRes] =
+    await Promise.all([
+      fetch(`${API_URL}?type=members`),
+      fetch(`${API_URL}?type=groups`)
+    ]);
+  
+  members = await membersRes.json();
+  groupsMaster = await groupsRes.json();
+  
+  console.timeEnd("fetch all");
     
     console.time("buildMemberList");
     buildMemberList();
