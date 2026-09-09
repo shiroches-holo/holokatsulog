@@ -253,6 +253,11 @@ function changeWatchDate(videoId) {
   input.value =
     watchLog.date || "";
 
+  input.style.position = "fixed";
+  input.style.left = "-9999px";
+
+  document.body.appendChild(input);
+
   input.onchange = () => {
 
     saveWatchLog(
@@ -263,11 +268,17 @@ function changeWatchDate(videoId) {
       }
     );
 
+    document.body.removeChild(input);
+
     render();
 
   };
 
-  input.click();
+  if (input.showPicker) {
+    input.showPicker();
+  } else {
+    input.click();
+  }
 
 }
 
