@@ -820,3 +820,38 @@ tr:hover {
 
   min-width: 300px;
 }
+
+/* =========================
+   視聴状態
+========================= */
+.status-unwatched {
+  background: #e5e7eb;
+  color: #374151;
+}
+
+.status-watched {
+  background: #22c55e;
+  color: white;
+}
+
+.status-realtime {
+  background: #3b82f6;
+  color: white;
+}
+
+.status-releaseday {
+  background: #a855f7;
+  color: white;
+}
+
+.status-partial {
+  background: #f59e0b;
+  color: white;
+}
+
+.watch-status {
+  padding: 4px 8px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: bold;
+}
