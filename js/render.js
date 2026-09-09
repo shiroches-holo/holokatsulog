@@ -197,6 +197,17 @@ function closeWatchModal() {
     .classList.add("hidden");
 }
 
+function openWatchModalById(videoId) {
+
+  const item =
+    window.data.find(v => v.videoId === videoId);
+
+  if (!item) return;
+
+  openWatchModal(item);
+
+}
+
 function render() {
   const tbody = document.querySelector("#list tbody");
   tbody.innerHTML = ""; // ←これも必要！
