@@ -1,3 +1,5 @@
+console.log("app.js TEST 20260909-1518");
+
 window.data = [];
 
 const API_URL = config.api;
@@ -21,12 +23,16 @@ async function loadMembers() {
 
     // ✅ groups読み込み後に呼べるようにする
     await loadGroups();
+    console.time("buildMemberList");
     buildMemberList();
+    console.timeEnd("buildMemberList");
 
     const lastMember = localStorage.getItem("selectedMember");
     const memberId = lastMember || members[0].memberId;
 
-    loadMember(memberId);
+    console.time("loadMember");
+    await loadMember(memberId);
+    console.timeEnd("loadMember");
 
   } catch (err) {
     console.error(err);
@@ -442,9 +448,13 @@ async function loadMember(memberId) {
     // ✅ そのあと表示
     document.getElementById("loading").style.display = "flex";
 
+    console.time("fetch member");
+    
     const response = await fetch(`${API_URL}?member=${memberId}`);
     const json = await response.json();
 
+    console.timeEnd("fetch member");
+    
     // console.log(json);
     
     currentMember = json.member;
