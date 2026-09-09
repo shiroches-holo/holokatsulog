@@ -70,3 +70,15 @@ function getWatchLog(videoId) {
   return JSON.parse(data);
 
 }
+
+function saveWatchLog(videoId, data) {
+
+  const key =
+    `watch_${currentMember.memberId}_${videoId}`;
+
+  localStorage.setItem(
+    key,
+    JSON.stringify(data)
+  );
+
+}
