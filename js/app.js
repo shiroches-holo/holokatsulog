@@ -857,3 +857,4 @@ function changeWatchDate(videoId) {
       // 無視
     }
   }
+}
