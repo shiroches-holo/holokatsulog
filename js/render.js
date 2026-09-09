@@ -246,7 +246,7 @@ function openWatchModalById(videoId) {
 }
 
 function render() {
-  
+  console.count("render実行");
   console.time("render");
 
   console.time("filter");
