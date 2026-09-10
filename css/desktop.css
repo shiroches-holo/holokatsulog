@@ -6,17 +6,27 @@
 
   .card {
     display: flex;
-    gap: 16px;
+    gap: 20px;
     align-items: flex-start;
   }
 
   .thumb {
+    width: 240px;
     flex-shrink: 0;
-    width: 320px;
+  }
+
+  .thumb img {
+    width: 100%;
+    height: auto;
+    display: block;
   }
 
   .card-content {
     flex: 1;
+  }
+
+  .watch-area {
+    margin-left: auto;
   }
 
 }
