@@ -16,7 +16,7 @@ function updateStats(filtered) {
     getWatchLog(x.videoId);
   
   if (
-      ["watched", "realtime", "releaseday"]
+      ["watched", "realtime"]
         .includes(watchLog.status)
     ) {
       watched++;
@@ -177,11 +177,8 @@ function changeWatchStatus(videoId, status) {
   
   }
 
-  // リアタイ・公開日視聴
-  if (
-    status === "realtime" ||
-    status === "releaseday"
-  ) {
+  // リアタイ
+  if (status === "realtime") {
 
     date =
       item.publishedAt
@@ -313,7 +310,7 @@ function render() {
       getWatchLog(item.videoId);
     
     const watched =
-      ["watched", "realtime", "releaseday"]
+      ["watched", "realtime"]
         .includes(watchLog.status);
     
     if (status === "watched" && !watched) return false;
@@ -379,13 +376,7 @@ function render() {
         statusClass = "status-realtime";
         dateText = watchLog.date || "-";
         break;
-    
-      case "releaseday":
-        statusText = "公開日視聴";
-        statusClass = "status-releaseday";
-        dateText = watchLog.date || "-";
-        break;
-        
+           
     }   
 
       tr.innerHTML = `
@@ -454,23 +445,14 @@ function render() {
                   視聴済み
                 </div>
                                 
-                  ${item.videoType === "ARCHIVE" ? `
+                  ${item.videoType !== "SHORT" ? `
                     <div
                       class="watch-menu-item menu-realtime"
                       onclick="changeWatchStatus('${item.videoId}','realtime')">
                       リアタイ
                     </div>
                   ` : ""}
-                
-                  ${(item.videoType === "VIDEO" ||
-                      item.videoType === "SHORT") ? `
-                    <div
-                      class="watch-menu-item menu-releaseday"
-                      onclick="changeWatchStatus('${item.videoId}','releaseday')">
-                      公開日視聴
-                    </div>
-                  ` : ""}
-                
+                                
                 </div>
               
               </div>
