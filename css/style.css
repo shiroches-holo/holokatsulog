@@ -248,15 +248,21 @@ thead th {
 }*/
 
 .card {
-  background: white;
+  background:
+    color-mix(
+      in srgb,
+      var(--member-color1) 10%,
+      white
+    );
   border-left: 4px solid var(--member-color1);
   overflow: hidden;
 
   border-radius: 10px;
 
-  margin: 0 8px 24px;
+  margin: 0 8px 20px;
 
   box-shadow: 0 4px 10px rgba(0,0,0,.08);
+
 }
 
 /* ホバーで浮く */
