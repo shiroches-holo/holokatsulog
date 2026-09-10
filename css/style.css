@@ -658,6 +658,9 @@ thead th {
 */
 
 .type-tabs {
+  display: flex;
+  gap: 6px;
+  margin: 10px 0;
   position: sticky;
   top: 123px;
   z-index: 99;
