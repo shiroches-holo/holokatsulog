@@ -3,20 +3,22 @@
 ================================================================================= */
 
 body {
-  background:
-    color-mix(
-      in srgb,
-      var(--member-color3) 12%,
-      white
-    );
+  background: color-mix(
+    in srgb,
+    var(--member-color3) 12%,
+    white
+  );
 }
 
 /* ---------- ヘッダー ---------- */
+
 header {
-  background: linear-gradient(to bottom,
-      #fe68ad 0%,
-      #f09cc0 40%,
-      #ffacd3 100%);
+  background: linear-gradient(
+    to bottom,
+    #fe68ad 0%,
+    #f09cc0 40%,
+    #ffacd3 100%
+  );
   box-sizing: border-box;
   border-bottom: 2px solid rgba(255, 255, 255, 0.5);
   padding: 12px 14px;
@@ -36,22 +38,42 @@ h1 {
 .header-row {
   display: flex;
   flex-direction: column;
-  /* 縦に並べる */
   justify-content: space-between;
 }
 
-.header-note-top {
-  align-self: flex-end;
-  /* ←右寄せ */
-  font-size: 12px;
-  margin-top: 4px;
-  /* ←少し下げる */
-  white-space: nowrap;
-  /* ←折り返し防止 */
+.logo-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 8px;
+  background: #fff;
 }
 
+.header-logo {
+  height: 56px;
+  width: auto;
+}
 
-/* 読み込み中 */
+.header-note-top {
+  font-size: 12px;
+  color: #888;
+  white-space: nowrap;
+}
+
+.logo-area {
+  text-align: center;
+  background: #fff;
+}
+
+#appHeader {
+  padding: 0;
+  color: white;
+  width: 100%;
+  transition: 0.3s;
+}
+
+/* ---------- 読み込み中 ---------- */
+
 #loading {
   backdrop-filter: blur(2px);
   position: fixed;
@@ -59,38 +81,27 @@ h1 {
   left: 0;
   width: 100%;
   height: 100%;
-
   display: flex;
   flex-direction: column;
   justify-content: center;
-  /* ←縦中央 */
   align-items: center;
-  /* ←横中央 */
-
   background: rgba(255, 255, 255, 0.8);
   z-index: 999;
-
   font-size: 18px;
 }
 
-/* 読み込み中のアニメーション */
 .spinner {
   width: 48px;
   height: 48px;
-
   border-radius: 50%;
-
   background: conic-gradient(
     var(--member-color1),
     var(--member-color2),
     transparent 70%
   );
-
   -webkit-mask: radial-gradient(circle, transparent 58%, #000 60%);
   mask: radial-gradient(circle, transparent 58%, #000 60%);
-
   animation: spin 0.8s linear infinite;
-
   box-shadow: 0 0 12px var(--member-color1);
 }
 
@@ -104,7 +115,8 @@ h1 {
   }
 }
 
-/* ---------- 横(テーブル) ---------- */
+/* ---------- テーブル ---------- */
+
 table {
   background: white;
   border-radius: 10px;
@@ -118,26 +130,23 @@ th,
 td {
   font-size: 15px;
   border: none;
-  padding: 8px 8px;
+  padding: 8px;
 }
 
 #list td {
-   border: none;
-   background:
-    color-mix(
-      in srgb,
-      var(--member-color1) 12%,
-      white
-    );
+  background: color-mix(
+    in srgb,
+    var(--member-color1) 12%,
+    white
+  );
 }
 
 #list td:hover {
-  background:
-    color-mix(
-      in srgb,
-      var(--member-color3) 50%,
-      white
-    );
+  background: color-mix(
+    in srgb,
+    var(--member-color3) 50%,
+    white
+  );
 }
 
 thead th {
@@ -150,7 +159,6 @@ thead th {
   text-align: right;
   white-space: nowrap;
   font-variant-numeric: tabular-nums;
-  /* ←数字揃う */
 }
 
 #list th:nth-child(5),
@@ -163,7 +171,12 @@ thead th {
   text-align: center;
 }
 
+#list tbody td {
+  padding: 0;
+}
+
 /* ---------- コントロール ---------- */
+
 #controls {
   position: sticky;
   top: 0;
@@ -173,7 +186,6 @@ thead th {
   padding: 6px;
   margin-bottom: 15px;
   box-shadow: 0 4px 12px rgba(255, 160, 180, 0.2);
-
   display: flex;
   justify-content: space-between;
 }
@@ -193,7 +205,8 @@ thead th {
   margin-top: 10px;
 }
 
-/* ---------- stats ---------- */
+/* ---------- 統計 ---------- */
+
 #stats {
   display: flex;
   gap: 12px;
@@ -218,13 +231,11 @@ thead th {
   font-size: 12px;
 }
 
-/* 達成率100%で豪華演出 */
 .stat-box.completed {
   box-shadow: 0 0 18px rgba(212, 175, 55, 0.9);
   border: 2px solid #d4af37;
 }
 
-/* 達成率内にプログレスバー */
 .progress-bar {
   width: 100%;
   height: 6px;
@@ -239,54 +250,28 @@ thead th {
   transition: width 0.4s ease;
 }
 
-/* スマホ用 */
 .progress-bar.small {
   height: 4px;
 }
 
-/* ---------- 縦(カード) ---------- */
-/*.card {
-  background: white;
-  border-left: 4px solid var(--member-color1);
-
-  border-radius: 10px;
-
-  margin: 0 8px 12px;
-
-  box-shadow: 0 2px 6px rgba(0,0,0,.06);
-}
+/* ---------- カード ---------- */
 
 .card {
   background: white;
   border-left: 4px solid var(--member-color1);
-  border-radius: 10px;
 
-  margin: 0 8px 12px;
-  padding: 12px;
-
-  box-shadow: 0 2px 6px rgba(0,0,0,.06);
-}*/
-
-.card {
-  background: white;
-  border-left: 4px solid var(--member-color1);
   overflow: hidden;
-
   border-radius: 10px;
 
   margin: 0 8px 20px;
   padding: 12px;
 
   box-shadow: 0 4px 10px rgba(0,0,0,.08);
-
 }
 
-/* ホバーで浮く */
 .card:hover {
   transform: translateY(-2px);
-
   background: white;
-
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
 }
 
@@ -295,11 +280,9 @@ thead th {
   margin-bottom: 6px;
 }
 
-/* チェック位置 */
 .card .check-area {
   position: static;
   flex-shrink: 0;
-  /* ←これも入れる */
   right: 12px;
   bottom: 12px;
 }
@@ -311,16 +294,12 @@ thead th {
   gap: 10px;
 }
 
-#list tbody td {
-  padding: 0;
-}
+/* ---------- 再生リスト ---------- */
 
-/* ---------- その他 ---------- */
 #playlistFilterArea {
   font-size: 22px;
   max-height: 150px;
   overflow-y: auto;
-  /*スクロールあり*/
   border: 1px solid #ccc;
   padding: 5px;
   background: #fafafa;
@@ -331,21 +310,24 @@ thead th {
   margin-bottom: 4px;
 }
 
-/* 再生リスト選択を展開時*/
 #playlistBox[open] #playlistFilterArea {
   max-height: 600px;
-  /* 表示の制限実質なし */
 }
 
 #playlistBox {
   margin-bottom: 20px;
   padding-bottom: 10px;
   border-bottom: 2px solid #eee;
-  /* 区切り線 */
 }
 
 #playlistBox summary {
   font-weight: bold;
+}
+
+.playlist-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .list-header {
@@ -360,90 +342,70 @@ thead th {
   font-weight: bold;
 }
 
-.playlist-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
+/* ---------- データ移行 ---------- */
 
-/* データ移行 */
 .data-transfer {
   text-align: right;
 }
 
 /* ---------- メッセージ ---------- */
+
 #message {
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%) scale(0.9);
-
   padding: 14px 22px;
   font-size: 14px;
   font-weight: bold;
-
   background: white;
   border-radius: 12px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-
   opacity: 0;
   pointer-events: none;
-
   transition: all 0.25s ease;
   z-index: 500;
 }
 
-/* 表示時 */
 #message.show {
   opacity: 1;
   transform: translate(-50%, -50%) scale(1);
 }
 
-/* ヘルプ */
+/* ---------- ヘルプ ---------- */
+
 #helpModal {
   display: none;
-  /* ←基本非表示 */
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-
   background: rgba(0, 0, 0, 0.5);
   z-index: 1000;
 }
 
-/* 中央配置は中身でやる */
 #helpModal .modal-content {
   position: absolute;
   top: 50%;
   left: 50%;
   max-height: 80vh;
-  /* 画面の80%まで */
   overflow: hidden;
-  /* 全体はスクロールさせない */
   transform: translate(-50%, -50%);
-  /* ←これが一番安定 */
-
   background: #fff;
   border-radius: 14px;
   box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
-  /* ←強める */
   padding: 20px;
-
   text-align: left;
 }
 
-/* 見出し */
 .tab-panel h3 {
   text-align: left;
-  /* ←強制左寄せ */
   font-size: 18px;
   margin-bottom: 10px;
   border-left: 4px solid #3b82f6;
   padding-left: 8px;
   color: #1f2937;
-
 }
 
 .tab-buttons button {
@@ -462,7 +424,6 @@ thead th {
   background: #3b82f6;
   color: white;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-  /* ←これ追加 */
 }
 
 #closeHelp {
@@ -479,23 +440,19 @@ thead th {
   background: #d1d5db;
 }
 
-/* 中身だけスクロール */
 .tab-content {
   max-height: 60vh;
   overflow-y: auto;
   padding-right: 6px;
-  /* スクロールバー余白 */
   border-top: 1px solid #eee;
-  padding-top: 10px
+  padding-top: 10px;
 }
 
-/* 本文の余白調整 */
 .tab-panel p {
   line-height: 1.6;
   margin-bottom: 10px;
 }
 
-/* 注意エリア */
 .data-note {
   background: #fff7ed;
   border-left: 4px solid #f97316;
@@ -503,8 +460,8 @@ thead th {
   border-radius: 6px;
 }
 
+/* ---------- バージョン履歴 ---------- */
 
-/* バージョン履歴情報 */
 .version-item {
   margin-bottom: 14px;
 }
@@ -526,12 +483,7 @@ thead th {
   font-size: 14px;
 }
 
-#appHeader {
-  padding: 0px;
-  color: white;
-  width: 100%;
-  transition: .3s;
-}
+/* ---------- ホロメン選択 ---------- */
 
 .member-item {
   padding: 12px;
@@ -552,20 +504,18 @@ thead th {
   box-sizing: border-box;
 }
 
-/* アイコン丸 */
 .member-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, 70px);
   gap: 12px;
-  justify-content: start; /* ←これ重要 */
+  justify-content: start;
 }
 
 .member-card {
   position: relative;
-  width: 70px; /* ←サイズも固定して安定 */
+  width: 70px;
 }
 
-/* カード */
 .member-card img {
   width: 70px;
   height: 70px;
@@ -573,33 +523,26 @@ thead th {
   border-radius: 12px;
 }
 
-/* 名前 */
 .member-name {
   text-align: center;
   font-size: 12px;
   margin-top: 4px;
-
-  white-space: normal;        /* ←改行OKに変更 */
+  white-space: normal;
   overflow: hidden;
-
   display: -webkit-box;
-  -webkit-line-clamp: 2;      /* ←2行まで表示 */
+  -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
 }
 
-/* ⭐ボタン */
 .favorite-btn {
   position: absolute;
   top: -4px;
   right: -4px;
-
   background: white;
   border-radius: 50%;
   border: none;
-
   font-size: 14px;
   cursor: pointer;
-
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 }
 
@@ -610,7 +553,6 @@ thead th {
 .group-row {
   display: grid;
   grid-template-columns: repeat(4, 80px);
-  /* ←固定サイズ */
   gap: 12px;
 }
 
@@ -630,1023 +572,33 @@ thead th {
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
 }
 
-/* =========================
-   ヘッダー
-========================= */
-
-.logo-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  padding: 0 8px;
-  background: #fff;
-}
-
-/* ロゴ */
-.header-logo {
-  height: 56px;
-  /* ←高さ固定（ここがポイント） */
-  width: auto;
-}
-
-/* 注意文 */
-.header-note-top {
-  font-size: 12px;
-  color: #888;
-  white-space: nowrap;
-}
-
-.logo-area {
-  text-align: center;
-  background: #fff;
-}
-
-/* =========================
-   ヘッダーホロメン選択
-========================= */
+/* ---------- ヘッダー内ホロメン選択 ---------- */
 
 .member-selector {
   width: 100%;
   display: flex;
   align-items: center;
   gap: 12px;
-
   border: none;
-
   padding: 12px 16px;
-
-  background:
-    linear-gradient(135deg,
-      var(--member-color1),
-      var(--member-color2),
-      var(--member-color3));
-
-  cursor: pointer;
-}
-
-.member-icon {
-  width: 40px;
-  height: 40px;
-
-  border-radius: 50%;
-
-  object-fit: cover;
-
-  background: #fff;
-
-  flex-shrink: 0;
-
-  border: 2px solid rgba(255, 255, 255, .8);
-
-  box-shadow: 0 2px 6px rgba(0, 0, 0, .3);
-}
-
-.member-info {
-  flex: 1;
-  text-align: left;
-}
-
-.member-header-name {
-  color: #fff;
-
-  font-size: 1.2rem;
-  font-weight: 700;
-  text-shadow:
-    0 2px 4px rgba(0, 0, 0, 0.5),
-    0 4px 8px rgba(0, 0, 0, 0.3);
-}
-
-.fanmark {
-  text-shadow:
-    0 0 4px rgba(255, 255, 255, 0.7),
-    /* ←少し弱く */
-    0 1px 3px rgba(0, 0, 0, 0.5);
-
-  filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.6));
-
-  margin-left: 6px;
-  /* ←ちょい離すと見やすい */
-}
-
-.member-arrow {
-
-  color: rgba(255, 255, 255, 0.966);
-  /* ←少し薄く */
-  font-size: 1.2rem;
-  /* ←少し小さく */
-
-  font-size: 1.4rem;
-
-  text-shadow:
-    0 1px 2px rgba(0, 0, 0, 0.4);
-}
-
-.modal-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.close-btn {
-  position: static;
-
-  font-size: 22px;
-  cursor: pointer;
-
-  color: #666;
-}
-
-.close-btn:hover {
-  color: #000;
-}
-
-.type-tabs {
-  display: flex;
-  gap: 6px;
-  margin: 10px 0;
-}
-
-.tab {
-  flex: 1;
-  padding: 8px 0;
-
-  background: #eee;
-  border: none;
-  border-radius: 8px;
-
-  font-size: 14px;
-  cursor: pointer;
-
-  transition: 0.2s;
-}
-/*
-.tab.active {
-  background: #3b82f6;
-  color: white;
-}
-*/
-.tab:hover {
-  background: #dbeafe;
-}
-
-.status {
-  font-size: 12px;
-  margin-left: 4px;
-}
-
-.status.terminated {
-  color: #ef4444; /* 赤 */
-}
-
-.status.graduated {
-  color: #f97316; /* オレンジ */
-}
-
-.status.inactive {
-  color: #6b7280; /* グレー */
-}
-
-.search-bar {
-  display: flex;
-  gap: 8px;
-  padding: 8px 12px;
-}
-
-.search-bar input {
-  flex: 1;
-  padding: 10px;
-  border-radius: 10px;
-  border: 1px solid #ccc;
-  font-size: 14px;
-}
-
-.filter-btn {
-  padding: 10px 14px;
-  border-radius: 10px;
-  border: 1px solid #ccc;
-  background: #f3f4f6;
-  cursor: pointer;
-}
-
-/* =========================
-   Page Switch
-========================= */
-
-.page {
-  display: none;
-}
-
-.page.active {
-  display: block;
-}
-
-/* =========================
-   視聴状態
-========================= */
-
-.hidden {
-  display: none;
-}
-
-.status-unwatched {
-  background: #e5e7eb;
-  color: #374151;
-}
-
-.status-watched {
-  background: #22c55e;
-  color: white;
-}
-
-.status-realtime {
-  background: #3b82f6;
-  color: white;
-}
-
-.status-partial {
-  background: #f59e0b;
-  color: white;
-}
-
-.watch-status {
-  padding: 4px 10px;
-  border-radius: 999px;
-  font-size: 12px;
-  font-weight: bold;
-  user-select: none;
-  cursor: pointer;
-}
-
-.watch-date {
-  color: #6b7280;
-}
-
-.watch-date.editable {
-
-  color: #2563eb;
-  cursor: pointer;
-
-}
-
-.watch-date.editable:hover {
-
-  color: #1d4ed8;
-
-}
-
-/* =========================
-   視聴状態メニュー
-========================= */
-
-.watch-area {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-}
-
-.watch-status {
-  cursor: pointer;
-}
-
-.watch-status:active {
-  transform: scale(0.96);
-}
-
-.watch-menu {
-  position: absolute;
-
-  bottom: calc(100% + 6px);
-  right: 0;
-
-  min-width: 110px;
-
-  background: #fff;
-  border: 1px solid #e5e7eb;
-  border-radius: 10px;
-
-  overflow: hidden;
-
-  box-shadow: 0 8px 24px rgba(0,0,0,.15);
-
-  z-index: 1000;
-}
-
-.watch-menu.hidden {
-  display: none;
-}
-
-.watch-menu-item {
-
-  padding: 10px 12px;
-
-  font-size: 13px;
-
-  cursor: pointer;
-
-  white-space: nowrap;
-
-  transition: background .15s;
-
-}
-
-.watch-menu-item:hover {
-
-  background: #f3f4f6;
-
-}
-
-.menu-unwatched {
-  color: #6b7280;
-  font-weight: 600;
-}
-
-.menu-partial {
-  color: #f59e0b;
-  font-weight: 600;
-}
-
-.menu-watched {
-  color: #10b981;
-  font-weight: 600;
-}
-
-.menu-realtime {
-  color: #3b82f6;
-  font-weight: 600;
-}
-      #f09cc0 40%,
-      #ffacd3 100%);
-  box-sizing: border-box;
-  border-bottom: 2px solid rgba(255, 255, 255, 0.5);
-  padding: 12px 14px;
-  margin-bottom: 15px;
-  box-shadow: 0 4px 12px rgba(254, 104, 173, 0.3);
-  position: relative;
-}
-
-h1 {
-  font-size: 22px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
-}
-
-.header-row {
-  display: flex;
-  flex-direction: column;
-  /* 縦に並べる */
-  justify-content: space-between;
-}
-
-.header-note-top {
-  align-self: flex-end;
-  /* ←右寄せ */
-  font-size: 12px;
-  margin-top: 4px;
-  /* ←少し下げる */
-  white-space: nowrap;
-  /* ←折り返し防止 */
-}
-
-
-/* 読み込み中 */
-#loading {
-  backdrop-filter: blur(2px);
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  /* ←縦中央 */
-  align-items: center;
-  /* ←横中央 */
-
-  background: rgba(255, 255, 255, 0.8);
-  z-index: 999;
-
-  font-size: 18px;
-}
-
-/* 読み込み中のアニメーション */
-.spinner {
-  width: 48px;
-  height: 48px;
-
-  border-radius: 50%;
-
-  background: conic-gradient(
+  background: linear-gradient(
+    135deg,
     var(--member-color1),
     var(--member-color2),
-    transparent 70%
+    var(--member-color3)
   );
-
-  -webkit-mask: radial-gradient(circle, transparent 58%, #000 60%);
-  mask: radial-gradient(circle, transparent 58%, #000 60%);
-
-  animation: spin 0.8s linear infinite;
-
-  box-shadow: 0 0 12px var(--member-color1);
-}
-
-@keyframes spin {
-  from {
-    transform: rotate(0deg);
-  }
-
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-/* ---------- 横(テーブル) ---------- */
-table {
-  background: white;
-  border-radius: 10px;
-  overflow: hidden;
-  box-shadow: 0 6px 16px rgba(255, 150, 180, 0.25);
-  width: 100%;
-  border-collapse: collapse;
-}
-
-th,
-td {
-  font-size: 15px;
-  border: 1px solid black;
-  padding: 8px 8px;
-}
-
-#list td {
-  background:
-    color-mix(
-      in srgb,
-      var(--member-color1) 12%,
-      white
-    );
-}
-
-thead th {
-  position: sticky;
-  top: 0;
-  background: #e3e8ef;
-}
-
-.time-cell {
-  text-align: right;
-  white-space: nowrap;
-  font-variant-numeric: tabular-nums;
-  /* ←数字揃う */
-}
-
-#list th:nth-child(5),
-#list td:nth-child(5) {
-  white-space: normal;
-  word-break: break-word;
-}
-
-.check-cell {
-  text-align: center;
-}
-
-/* ---------- コントロール ---------- */
-#controls {
-  position: sticky;
-  top: 0;
-  z-index: 10;
-  background: white;
-  border-radius: 10px;
-  padding: 6px;
-  margin-bottom: 15px;
-  box-shadow: 0 4px 12px rgba(255, 160, 180, 0.2);
-
-  display: flex;
-  justify-content: space-between;
-}
-
-#controls input,
-#controls select,
-#controls button {
-  font-size: 16px;
-}
-
-.controls-left {
-  flex: 1;
-}
-
-.controls-right {
-  text-align: right;
-  margin-top: 10px;
-}
-
-/* ---------- stats ---------- */
-#stats {
-  display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
-  margin-bottom: 15px;
-}
-
-.stat-box {
-  background: white;
-  border-radius: 12px;
-  padding: 12px 16px;
-  min-width: 140px;
-  box-shadow: 0 4px 10px rgba(255, 150, 180, 0.2);
-}
-
-.stat-box .value {
-  font-size: 18px;
-  font-weight: bold;
-}
-
-.stat-box .label {
-  font-size: 12px;
-}
-
-/* 達成率100%で豪華演出 */
-.stat-box.completed {
-  box-shadow: 0 0 18px rgba(212, 175, 55, 0.9);
-  border: 2px solid #d4af37;
-}
-
-/* 達成率内にプログレスバー */
-.progress-bar {
-  width: 100%;
-  height: 6px;
-  background: #eee;
-  border-radius: 10px;
-  margin-top: 6px;
-}
-
-.progress {
-  height: 100%;
-  border-radius: 10px;
-  transition: width 0.4s ease;
-}
-
-/* スマホ用 */
-.progress-bar.small {
-  height: 4px;
-}
-
-/* ---------- 縦(カード) ---------- */
-/*.card {
-  background: white;
-  border-left: 4px solid var(--member-color1);
-
-  border-radius: 10px;
-
-  margin: 0 8px 12px;
-
-  box-shadow: 0 2px 6px rgba(0,0,0,.06);
-}
-
-.card {
-  background: white;
-  border-left: 4px solid var(--member-color1);
-  border-radius: 10px;
-
-  margin: 0 8px 12px;
-  padding: 12px;
-
-  box-shadow: 0 2px 6px rgba(0,0,0,.06);
-}*/
-
-.card {
-  background: white;
-  border-left: 4px solid var(--member-color1);
-  overflow: hidden;
-
-  border-radius: 10px;
-
-  margin: 0 8px 20px;
-
-  box-shadow: 0 4px 10px rgba(0,0,0,.08);
-
-}
-
-/* ホバーで浮く */
-.card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
-}
-
-.card .title {
-  font-weight: bold;
-  margin-bottom: 6px;
-}
-
-/* チェック位置 */
-.card .check-area {
-  position: static;
-  flex-shrink: 0;
-  /* ←これも入れる */
-  right: 12px;
-  bottom: 12px;
-}
-
-.card .playlist-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 10px;
-}
-
-#list tbody td {
-  padding: 0;
-}
-
-/* ---------- その他 ---------- */
-#playlistFilterArea {
-  font-size: 22px;
-  max-height: 150px;
-  overflow-y: auto;
-  /*スクロールあり*/
-  border: 1px solid #ccc;
-  padding: 5px;
-  background: #fafafa;
-}
-
-#playlistFilterArea label {
-  display: block;
-  margin-bottom: 4px;
-}
-
-/* 再生リスト選択を展開時*/
-#playlistBox[open] #playlistFilterArea {
-  max-height: 600px;
-  /* 表示の制限実質なし */
-}
-
-#playlistBox {
-  margin-bottom: 20px;
-  padding-bottom: 10px;
-  border-bottom: 2px solid #eee;
-  /* 区切り線 */
-}
-
-#playlistBox summary {
-  font-weight: bold;
-}
-
-.list-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 10px;
-}
-
-.list-header p {
-  margin: 0;
-  font-weight: bold;
-}
-
-.playlist-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-/* データ移行 */
-.data-transfer {
-  text-align: right;
-}
-
-/* ---------- メッセージ ---------- */
-#message {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) scale(0.9);
-
-  padding: 14px 22px;
-  font-size: 14px;
-  font-weight: bold;
-
-  background: white;
-  border-radius: 12px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-
-  opacity: 0;
-  pointer-events: none;
-
-  transition: all 0.25s ease;
-  z-index: 500;
-}
-
-/* 表示時 */
-#message.show {
-  opacity: 1;
-  transform: translate(-50%, -50%) scale(1);
-}
-
-/* ヘルプ */
-#helpModal {
-  display: none;
-  /* ←基本非表示 */
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-
-  background: rgba(0, 0, 0, 0.5);
-  z-index: 1000;
-}
-
-/* 中央配置は中身でやる */
-#helpModal .modal-content {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  max-height: 80vh;
-  /* 画面の80%まで */
-  overflow: hidden;
-  /* 全体はスクロールさせない */
-  transform: translate(-50%, -50%);
-  /* ←これが一番安定 */
-
-  background: #fff;
-  border-radius: 14px;
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
-  /* ←強める */
-  padding: 20px;
-
-  text-align: left;
-}
-
-/* 見出し */
-.tab-panel h3 {
-  text-align: left;
-  /* ←強制左寄せ */
-  font-size: 18px;
-  margin-bottom: 10px;
-  border-left: 4px solid #3b82f6;
-  padding-left: 8px;
-  color: #1f2937;
-
-}
-
-.tab-buttons button {
-  border: none;
-  padding: 8px 12px;
-  background: #f3f4f6;
-  border-radius: 8px;
-  transition: 0.2s;
-}
-
-.tab-buttons button:hover {
-  background: #e5e7eb;
-}
-
-.tab-buttons button.active {
-  background: #3b82f6;
-  color: white;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-  /* ←これ追加 */
-}
-
-#closeHelp {
-  margin-top: 10px;
-  padding: 6px 12px;
-  border-radius: 6px;
-  border: none;
-  background: #e5e7eb;
-  cursor: pointer;
-  transition: 0.2s;
-}
-
-#closeHelp:hover {
-  background: #d1d5db;
-}
-
-/* 中身だけスクロール */
-.tab-content {
-  max-height: 60vh;
-  overflow-y: auto;
-  padding-right: 6px;
-  /* スクロールバー余白 */
-  border-top: 1px solid #eee;
-  padding-top: 10px
-}
-
-/* 本文の余白調整 */
-.tab-panel p {
-  line-height: 1.6;
-  margin-bottom: 10px;
-}
-
-/* 注意エリア */
-.data-note {
-  background: #fff7ed;
-  border-left: 4px solid #f97316;
-  padding: 10px;
-  border-radius: 6px;
-}
-
-
-/* バージョン履歴情報 */
-.version-item {
-  margin-bottom: 14px;
-}
-
-.version-header {
-  font-size: 15px;
-  margin-bottom: 4px;
-}
-
-.version-header .date {
-  font-size: 13px;
-  color: #666;
-  margin-left: 6px;
-}
-
-.version-list {
-  margin: 0;
-  padding-left: 20px;
-  font-size: 14px;
-}
-
-#appHeader {
-  padding: 0px;
-  color: white;
-  width: 100%;
-  transition: .3s;
-}
-
-.member-item {
-  padding: 12px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  margin-bottom: 8px;
-  cursor: pointer;
-}
-
-.member-item:hover {
-  background: #f5f5f5;
-}
-
-#memberSearch {
-  width: 100%;
-  padding: 10px;
-  margin: 10px 0;
-  box-sizing: border-box;
-}
-
-/* アイコン丸 */
-.member-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, 70px);
-  gap: 12px;
-  justify-content: start; /* ←これ重要 */
-}
-
-.member-card {
-  position: relative;
-  width: 70px; /* ←サイズも固定して安定 */
-}
-
-/* カード */
-.member-card img {
-  width: 70px;
-  height: 70px;
-  object-fit: cover;
-  border-radius: 12px;
-}
-
-/* 名前 */
-.member-name {
-  text-align: center;
-  font-size: 12px;
-  margin-top: 4px;
-
-  white-space: normal;        /* ←改行OKに変更 */
-  overflow: hidden;
-
-  display: -webkit-box;
-  -webkit-line-clamp: 2;      /* ←2行まで表示 */
-  -webkit-box-orient: vertical;
-}
-
-/* ⭐ボタン */
-.favorite-btn {
-  position: absolute;
-  top: -4px;
-  right: -4px;
-
-  background: white;
-  border-radius: 50%;
-  border: none;
-
-  font-size: 14px;
-  cursor: pointer;
-
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-}
-
-.group-section {
-  margin-bottom: 20px;
-}
-
-.group-row {
-  display: grid;
-  grid-template-columns: repeat(4, 80px);
-  /* ←固定サイズ */
-  gap: 12px;
-}
-
-#allMembers {
-  display: block;
-}
-
-.header-image {
-  height: 120px;
-}
-
-.member-select {
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-  transform: scale(1.02);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
-}
-
-/* =========================
-   ヘッダー
-========================= */
-
-.logo-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  padding: 0 8px;
-  background: #fff;
-}
-
-/* ロゴ */
-.header-logo {
-  height: 56px;
-  /* ←高さ固定（ここがポイント） */
-  width: auto;
-}
-
-/* 注意文 */
-.header-note-top {
-  font-size: 12px;
-  color: #888;
-  white-space: nowrap;
-}
-
-.logo-area {
-  text-align: center;
-  background: #fff;
-}
-
-/* =========================
-   ヘッダーホロメン選択
-========================= */
-
-.member-selector {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-
-  border: none;
-
-  padding: 12px 16px;
-
-  background:
-    linear-gradient(135deg,
-      var(--member-color1),
-      var(--member-color2),
-      var(--member-color3));
-
   cursor: pointer;
 }
 
 .member-icon {
   width: 40px;
   height: 40px;
-
   border-radius: 50%;
-
   object-fit: cover;
-
   background: #fff;
-
   flex-shrink: 0;
-
-  border: 2px solid rgba(255, 255, 255, .8);
-
-  box-shadow: 0 2px 6px rgba(0, 0, 0, .3);
+  border: 2px solid rgba(255, 255, 255, 0.8);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
 }
 
 .member-info {
@@ -1656,7 +608,6 @@ thead th {
 
 .member-header-name {
   color: #fff;
-
   font-size: 1.2rem;
   font-weight: 700;
   text-shadow:
@@ -1667,27 +618,18 @@ thead th {
 .fanmark {
   text-shadow:
     0 0 4px rgba(255, 255, 255, 0.7),
-    /* ←少し弱く */
     0 1px 3px rgba(0, 0, 0, 0.5);
-
   filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.6));
-
   margin-left: 6px;
-  /* ←ちょい離すと見やすい */
 }
 
 .member-arrow {
-
   color: rgba(255, 255, 255, 0.966);
-  /* ←少し薄く */
-  font-size: 1.2rem;
-  /* ←少し小さく */
-
   font-size: 1.4rem;
-
-  text-shadow:
-    0 1px 2px rgba(0, 0, 0, 0.4);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
 }
+
+/* ---------- モーダル ---------- */
 
 .modal-header {
   display: flex;
@@ -1697,10 +639,8 @@ thead th {
 
 .close-btn {
   position: static;
-
   font-size: 22px;
   cursor: pointer;
-
   color: #666;
 }
 
@@ -1717,39 +657,27 @@ thead th {
 .tab {
   flex: 1;
   padding: 8px 0;
-
   background: #eee;
   border: none;
   border-radius: 8px;
-
   font-size: 14px;
   cursor: pointer;
-
   transition: 0.2s;
 }
-
-/*
-.tab.active {
-  background: #3b82f6;
-  color: white;
-  font-weight: bold;
-}
-*/
 
 .tab.active {
   background: var(--member-color1);
-
   color: white;
   font-weight: bold;
-
   border: 2px solid var(--member-color2);
-
-  box-shadow: 0 4px 12px rgba(0,0,0,.2);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 .tab:hover {
   background: #dbeafe;
 }
+
+/* ---------- ホロメン状態 ---------- */
 
 .status {
   font-size: 12px;
@@ -1757,16 +685,18 @@ thead th {
 }
 
 .status.terminated {
-  color: #ef4444; /* 赤 */
+  color: #ef4444;
 }
 
 .status.graduated {
-  color: #f97316; /* オレンジ */
+  color: #f97316;
 }
 
 .status.inactive {
-  color: #6b7280; /* グレー */
+  color: #6b7280;
 }
+
+/* ---------- 検索 ---------- */
 
 .search-bar {
   display: flex;
@@ -1790,9 +720,7 @@ thead th {
   cursor: pointer;
 }
 
-/* =========================
-   Page Switch
-========================= */
+/* ---------- ページ切り替え ---------- */
 
 .page {
   display: none;
@@ -1802,9 +730,7 @@ thead th {
   display: block;
 }
 
-/* =========================
-   視聴状態
-========================= */
+/* ---------- 視聴状態 ---------- */
 
 .hidden {
   display: none;
@@ -1844,21 +770,15 @@ thead th {
 }
 
 .watch-date.editable {
-
   color: #2563eb;
   cursor: pointer;
-
 }
 
 .watch-date.editable:hover {
-
   color: #1d4ed8;
-
 }
 
-/* =========================
-   視聴状態メニュー
-========================= */
+/* ---------- 視聴状態メニュー ---------- */
 
 .watch-area {
   position: relative;
@@ -1867,30 +787,20 @@ thead th {
   align-items: flex-end;
 }
 
-.watch-status {
-  cursor: pointer;
-}
-
 .watch-status:active {
   transform: scale(0.96);
 }
 
 .watch-menu {
   position: absolute;
-
   bottom: calc(100% + 6px);
   right: 0;
-
   min-width: 110px;
-
   background: #fff;
   border: 1px solid #e5e7eb;
   border-radius: 10px;
-
   overflow: hidden;
-
-  box-shadow: 0 8px 24px rgba(0,0,0,.15);
-
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
   z-index: 1000;
 }
 
@@ -1899,23 +809,15 @@ thead th {
 }
 
 .watch-menu-item {
-
   padding: 10px 12px;
-
   font-size: 13px;
-
   cursor: pointer;
-
   white-space: nowrap;
-
-  transition: background .15s;
-
+  transition: background 0.15s;
 }
 
 .watch-menu-item:hover {
-
   background: #f3f4f6;
-
 }
 
 .menu-unwatched {
@@ -1937,5 +839,3 @@ thead th {
   color: #3b82f6;
   font-weight: 600;
 }
-
-
