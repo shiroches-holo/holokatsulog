@@ -655,9 +655,14 @@ thead th {
   margin: 10px 0;
   margin-bottom: 15px;
   position: sticky;
-  top: 123px;
+  top: 138px;
   z-index: 99;
-  background: white;
+  background:
+    color-mix(
+      in srgb,
+      var(--member-color3) 12%,
+      white
+    );
   box-shadow: 0 2px 6px rgba(0,0,0,.08);
 }
 
