@@ -780,12 +780,12 @@ thead th {
 
   transition: 0.2s;
 }
-
+/*
 .tab.active {
   background: #3b82f6;
   color: white;
 }
-
+*/
 .tab:hover {
   background: #dbeafe;
 }
