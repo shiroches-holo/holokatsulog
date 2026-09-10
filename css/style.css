@@ -673,7 +673,7 @@ thead th {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
-.tab:hover {
+.tab:hover:not(.active) {
   background: #dbeafe;
 }
 
