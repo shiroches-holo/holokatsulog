@@ -784,7 +784,6 @@ thead th {
 .tab.active {
   background: #3b82f6;
   color: white;
-  font-weight: bold;
 }
 
 .tab:hover {
