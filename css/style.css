@@ -771,23 +771,10 @@ tr:hover {
   transition: 0.2s;
 }
 
-/*
 .tab.active {
   background: #3b82f6;
   color: white;
   font-weight: bold;
-}
-*/
-
-.tab.active {
-  background:
-    linear-gradient(
-      135deg,
-      var(--member-color1),
-      var(--member-color2)
-    );
-
-  color: white;
 }
 
 .tab:hover {
