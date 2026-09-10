@@ -222,12 +222,21 @@ thead th {
 
 /* ---------- 縦(カード) ---------- */
 .card {
-  background: white;
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255,255,255,0.96),
+      rgba(255,255,255,0.92)
+    );
+
+  border-left: 4px solid var(--member-color1);
+
   border-radius: 10px;
   padding: 12px;
-  margin-bottom: 12px;
-  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
-  position: relative;
+
+  margin: 0 8px 12px;
+
+  box-shadow: 0 3px 8px rgba(0,0,0,.08);
 }
 
 /* ホバーで浮く */
