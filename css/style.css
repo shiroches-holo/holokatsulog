@@ -653,9 +653,9 @@ thead th {
   display: flex;
   gap: 6px;
   padding: 10px 0;
-  padding-bottom: 15px;
   position: sticky;
-  top: 138px;
+  top: 123px;
+  border-top: 1px solid rgba(255,255,255,.5);
   z-index: 99;
   background:
     color-mix(
