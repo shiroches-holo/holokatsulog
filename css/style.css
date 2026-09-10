@@ -14,22 +14,6 @@ body {
 /* ---------- ヘッダー ---------- */
 header {
   background: linear-gradient(to bottom,
-      #fe68ad 0%,/* =================================================================================
-   ✅ 共通スタイル（ベース）
-================================================================================= */
-
-body {
-  background:
-    color-mix(
-      in srgb,
-      var(--member-color3) 12%,
-      white
-    );
-}
-
-/* ---------- ヘッダー ---------- */
-header {
-  background: linear-gradient(to bottom,
       #fe68ad 0%,
       #f09cc0 40%,
       #ffacd3 100%);
