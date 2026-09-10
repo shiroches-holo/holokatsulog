@@ -130,6 +130,15 @@ td {
     );
 }
 
+#list td:hover {
+  background:
+    color-mix(
+      in srgb,
+      var(--member-color3) 50%,
+      white
+    );
+}
+
 thead th {
   position: sticky;
   top: 0;
