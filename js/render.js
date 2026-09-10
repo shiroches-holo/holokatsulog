@@ -362,7 +362,12 @@ function render() {
     let dateText = "";
     
     switch (watchLog.status) {
-    
+
+      case "partial":
+        statusText = "途中";
+        statusClass = "status-partial";
+        break;
+        
       case "watched":
         statusText = "視聴済み";
         statusClass = "status-watched";
@@ -380,12 +385,7 @@ function render() {
         statusClass = "status-releaseday";
         dateText = watchLog.date || "-";
         break;
-    
-      case "partial":
-        statusText = "途中";
-        statusClass = "status-partial";
-        break;
-    
+        
     }   
 
       tr.innerHTML = `
@@ -436,27 +436,27 @@ function render() {
                   id="watch-menu-${item.videoId}"
                   class="watch-menu hidden">
                 
-                  <div
-                    class="watch-menu-item"
-                    onclick="changeWatchStatus('${item.videoId}','unwatched')">
-                    未視聴
-                  </div>
+                <div
+                  class="watch-menu-item menu-unwatched"
+                  onclick="changeWatchStatus('${item.videoId}','unwatched')">
+                  未視聴
+                </div>
                 
-                  <div
-                    class="watch-menu-item"
-                    onclick="changeWatchStatus('${item.videoId}','watched')">
-                    視聴済み
-                  </div>
+                <div
+                  class="watch-menu-item menu-partial"
+                  onclick="changeWatchStatus('${item.videoId}','partial')">
+                  途中
+                </div>
                 
-                  <div
-                    class="watch-menu-item"
-                    onclick="changeWatchStatus('${item.videoId}','partial')">
-                    途中
-                  </div>
-                
+                <div
+                  class="watch-menu-item menu-watched"
+                  onclick="changeWatchStatus('${item.videoId}','watched')">
+                  視聴済み
+                </div>
+                                
                   ${item.videoType === "ARCHIVE" ? `
                     <div
-                      class="watch-menu-item"
+                      class="watch-menu-item menu-realtime"
                       onclick="changeWatchStatus('${item.videoId}','realtime')">
                       リアタイ
                     </div>
@@ -465,7 +465,7 @@ function render() {
                   ${(item.videoType === "VIDEO" ||
                       item.videoType === "SHORT") ? `
                     <div
-                      class="watch-menu-item"
+                      class="watch-menu-item menu-releaseday"
                       onclick="changeWatchStatus('${item.videoId}','releaseday')">
                       公開日視聴
                     </div>
