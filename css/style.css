@@ -1076,7 +1076,7 @@ td {
   background:
     color-mix(
       in srgb,
-      var(--member-color3) 50%,
+      var(--member-color1) 12%,
       white
     );
 }
