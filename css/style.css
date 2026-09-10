@@ -13,7 +13,7 @@ body {
 /* ---------- ヘッダー ---------- */
 
 header {
-  background: linear-gradient(
+   background: linear-gradient(
     to bottom,
     #fe68ad 0%,
     #f09cc0 40%,
@@ -654,19 +654,6 @@ thead th {
   margin: 10px 0;
 }
 
-/*
-.tab {
-  flex: 1;
-  padding: 8px 0;
-  background: #eee;
-  border: none;
-  border-radius: 8px;
-  font-size: 14px;
-  cursor: pointer;
-  transition: 0.2s;
-}
-*/
-
 .tab {
   flex: 1;
   padding: 8px 0;
@@ -685,6 +672,7 @@ thead th {
   font-weight: bold;
   border: 2px solid var(--member-color2);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  position: sticky;
 }
 
 .tab:hover:not(.active) {
