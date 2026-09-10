@@ -266,6 +266,10 @@ thead th {
   gap: 10px;
 }
 
+#list tbody td {
+  padding: 0;
+}
+
 /* ---------- その他 ---------- */
 tr:hover {
   background: #ffe4ec;
