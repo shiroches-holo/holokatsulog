@@ -258,19 +258,9 @@
 
   /* ---------- カード ---------- */
 
-  .card {
-
-    font-size: 14px;
-
-    padding: 10px;
-
-    margin: 0 8px 10px;
-
-    overflow: hidden;
-
-    box-sizing: border-box;
-
-  }
+   .card {
+     font-size: 14px;
+   }
 
   .card .playlist-row {
 
