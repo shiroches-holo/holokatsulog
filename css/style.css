@@ -109,12 +109,14 @@ table {
   border-collapse: collapse;
 }
 
+/*
 th,
 td {
   font-size: 15px;
   border: 1px solid black;
   padding: 8px 8px;
 }
+*/
 
 thead th {
   position: sticky;
