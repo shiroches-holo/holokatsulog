@@ -3,7 +3,12 @@
 ================================================================================= */
 
 body {
-   background: #fff6f9;
+  background:
+    color-mix(
+      in srgb,
+      var(--member-color1) 12%,
+      white
+    );
 }
 
 /* ---------- ヘッダー ---------- */
@@ -248,12 +253,7 @@ thead th {
 }*/
 
 .card {
-  background:
-    color-mix(
-      in srgb,
-      var(--member-color1) 10%,
-      white
-    );
+  background: white;
   border-left: 4px solid var(--member-color1);
   overflow: hidden;
 
