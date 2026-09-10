@@ -1262,10 +1262,6 @@ thead th {
 }
 
 /* ---------- その他 ---------- */
-tr:hover {
-  background: #ffe4ec;
-}
-
 #playlistFilterArea {
   font-size: 22px;
   max-height: 150px;
