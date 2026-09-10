@@ -167,15 +167,14 @@ function changeWatchStatus(videoId, status) {
 
   // 視聴済み
   if (status === "watched") {
-
+  
     const oldLog =
       getWatchLog(videoId);
-
+  
     date =
       oldLog.date ||
-      new Date()
-        .toISOString()
-        .slice(0, 10);
+      item.publishedAt.slice(0, 10);
+  
   }
 
   // リアタイ・公開日視聴
