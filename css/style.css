@@ -909,3 +909,28 @@ tr:hover {
 
 }
 
+.menu-unwatched {
+  color: #6b7280;
+  font-weight: 600;
+}
+
+.menu-partial {
+  color: #f59e0b;
+  font-weight: 600;
+}
+
+.menu-watched {
+  color: #10b981;
+  font-weight: 600;
+}
+
+.menu-realtime {
+  color: #3b82f6;
+  font-weight: 600;
+}
+
+.menu-releaseday {
+  color: #8b5cf6;
+  font-weight: 600;
+}
+
