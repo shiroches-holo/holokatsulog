@@ -4,12 +4,19 @@
 
 @media (min-width: 1200px) {
 
-  .controls-left {
+  .card {
     display: flex;
+    gap: 16px;
+    align-items: flex-start;
+  }
+
+  .thumb {
+    flex-shrink: 0;
+    width: 320px;
+  }
+
+  .card-content {
     flex: 1;
-    flex-wrap: nowrap;
-    gap: 8px;
-    align-items: center;
   }
 
 }
