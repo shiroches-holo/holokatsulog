@@ -233,6 +233,21 @@ function toggleWatchMenu(videoId) {
 
 }
 
+// メニュー外クリックで閉じる
+document.addEventListener("click", e => {
+
+  if (!e.target.closest(".watch-area")) {
+
+    document
+      .querySelectorAll(".watch-menu")
+      .forEach(menu => {
+        menu.classList.add("hidden");
+      });
+
+  }
+
+});
+
 function openWatchModalById(videoId) {
 
   const item =
