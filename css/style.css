@@ -6,7 +6,7 @@ body {
   background:
     color-mix(
       in srgb,
-      var(--member-color1) 12%,
+      var(--member-color3) 12%,
       white
     );
 }
@@ -122,7 +122,12 @@ td {
 }
 
 #list td {
-  border: none;
+  background:
+    color-mix(
+      in srgb,
+      var(--member-color1) 12%,
+      white
+    );
 }
 
 thead th {
