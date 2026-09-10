@@ -122,7 +122,8 @@ td {
 }
 
 #list td {
-  background:
+   border: none;
+   background:
     color-mix(
       in srgb,
       var(--member-color1) 12%,
