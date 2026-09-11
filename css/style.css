@@ -691,14 +691,14 @@ thead th {
 .tab.active {
   background: color-mix(
     in srgb,
-    var(--member-color1) 30%,
+    var(--member-color1) 10%,
     white
   );
   color: #333;
   font-weight: bold;
   border: 2px solid color-mix(
     in srgb,
-    var(--member-color2) 30%,
+    var(--member-color2) 10%,
     white
   );
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
