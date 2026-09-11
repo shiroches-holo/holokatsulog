@@ -42,10 +42,20 @@ h1 {
   justify-content: space-between;
 }
 
+/*
 .logo-row {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding: 0 8px;
+  background: #fff;
+}
+*/
+
+.logo-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   padding: 0 8px;
   background: #fff;
 }
