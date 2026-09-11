@@ -97,7 +97,7 @@ header {
 }
 
 /* ---------- テーブル ---------- */
-
+/*
 table {
   background: white;
   border-radius: 10px;
@@ -155,7 +155,7 @@ thead th {
 #list tbody td {
   padding: 0;
 }
-
+*/
 /* ---------- コントロール ---------- */
 
 .controls-left {
