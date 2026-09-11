@@ -96,66 +96,6 @@ header {
   }
 }
 
-/* ---------- テーブル ---------- */
-/*
-table {
-  background: white;
-  border-radius: 10px;
-  overflow: hidden;
-  box-shadow: 0 6px 16px rgba(255, 150, 180, 0.25);
-  width: 100%;
-  border-collapse: collapse;
-}
-
-th,
-td {
-  font-size: 15px;
-  border: none;
-  padding: 8px;
-}
-
-#list td {
-  background: color-mix(
-    in srgb,
-    var(--member-color1) 12%,
-    white
-  );
-}
-
-#list td:hover {
-  background: color-mix(
-    in srgb,
-    var(--member-color3) 50%,
-    white
-  );
-}
-
-thead th {
-  position: sticky;
-  top: 0;
-  background: #e3e8ef;
-}
-
-.time-cell {
-  text-align: right;
-  white-space: nowrap;
-  font-variant-numeric: tabular-nums;
-}
-
-#list th:nth-child(5),
-#list td:nth-child(5) {
-  white-space: normal;
-  word-break: break-word;
-}
-
-.check-cell {
-  text-align: center;
-}
-
-#list tbody td {
-  padding: 0;
-}
-*/
 /* ---------- コントロール ---------- */
 
 .controls-left {
