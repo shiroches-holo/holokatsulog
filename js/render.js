@@ -264,8 +264,8 @@ function render() {
     return; // まだロード中なので描画しない
   }
 
-  const tbody = document.querySelector("#list tbody");
-  tbody.innerHTML = ""; // ←これも必要！
+  const list = document.getElementById("list");
+  list.innerHTML = "";
   
   const keyword = document.getElementById("search").value.toLowerCase();
   const status = document.getElementById("filterStatus").value;
@@ -348,8 +348,9 @@ function render() {
   // 描画
 
   filtered.forEach(item => {
-    const tr = document.createElement("tr");
-    tr.dataset.id = item.videoId;
+    const card = document.createElement("div");
+    card.className = "card";
+    card.dataset.id = item.videoId;
 
     const watchLog =
       getWatchLog(item.videoId);
@@ -379,16 +380,14 @@ function render() {
            
     }   
 
-      tr.innerHTML = `
-        <td colspan="5">
-          <div class="card">
+      card.innerHTML = `
 
-            <!-- サムネ -->
-            <div class="thumb">
-                <img src="https://img.youtube.com/vi/${item.videoId}/mqdefault.jpg" loading="lazy">
-            </div>
-            
-            <div class="card-content">
+          <!-- サムネ -->
+          <div class="thumb">
+              <img src="https://img.youtube.com/vi/${item.videoId}/mqdefault.jpg" loading="lazy">
+          </div>
+          
+          <div class="card-content">
 
             <div class="title">
               <a href="https://www.youtube.com/watch?v=${item.videoId}" target="_blank">
@@ -400,70 +399,70 @@ function render() {
             <div>⏱ ${formatDuration(item.durationSec)}</div>
            
             <div class="playlist-row">
-
+  
               <!-- 再生リスト -->
               <div class="playlist-text">
                 🎵 ${item.playlistUrl
-          ? `<a href="${item.playlistUrl}" target="_blank">${item.playlistName}</a>`
-          : item.playlistName
-        }
+              ? `<a href="${item.playlistUrl}" target="_blank">${item.playlistName}</a>`
+              : item.playlistName
+              }
+              </div>
+            
+          </div>  
+            
+            <div class="watch-area">
+            
+              <div
+                class="watch-status ${statusClass}"
+                onclick="toggleWatchMenu('${item.videoId}')">
+                ${statusText} ▼
+              </div>
+                            
+              <div
+                class="watch-date ${watchLog.status === "watched" ? "editable" : ""}"
+                onclick="changeWatchDate('${item.videoId}')">
+                ${dateText}
               </div>
               
-              <div class="watch-area">
+              <div
+                id="watch-menu-${item.videoId}"
+                class="watch-menu hidden">
               
-                <div
-                  class="watch-status ${statusClass}"
-                  onclick="toggleWatchMenu('${item.videoId}')">
-                  ${statusText} ▼
-                </div>
+              <div
+                class="watch-menu-item menu-unwatched"
+                onclick="changeWatchStatus('${item.videoId}','unwatched')">
+                未視聴
+              </div>
+              
+              <div
+                class="watch-menu-item menu-partial"
+                onclick="changeWatchStatus('${item.videoId}','partial')">
+                途中
+              </div>
+              
+              <div
+                class="watch-menu-item menu-watched"
+                onclick="changeWatchStatus('${item.videoId}','watched')">
+                視聴済み
+              </div>
                               
-                <div
-                  class="watch-date ${watchLog.status === "watched" ? "editable" : ""}"
-                  onclick="changeWatchDate('${item.videoId}')">
-                  ${dateText}
-                </div>
-                
-                <div
-                  id="watch-menu-${item.videoId}"
-                  class="watch-menu hidden">
-                
-                <div
-                  class="watch-menu-item menu-unwatched"
-                  onclick="changeWatchStatus('${item.videoId}','unwatched')">
-                  未視聴
-                </div>
-                
-                <div
-                  class="watch-menu-item menu-partial"
-                  onclick="changeWatchStatus('${item.videoId}','partial')">
-                  途中
-                </div>
-                
-                <div
-                  class="watch-menu-item menu-watched"
-                  onclick="changeWatchStatus('${item.videoId}','watched')">
-                  視聴済み
-                </div>
-                                
-                  ${item.videoType !== "SHORT" ? `
-                    <div
-                      class="watch-menu-item menu-realtime"
-                      onclick="changeWatchStatus('${item.videoId}','realtime')">
-                      リアタイ
-                    </div>
-                  ` : ""}
-                                
-                </div>
-              
+                ${item.videoType !== "SHORT" ? `
+                  <div
+                    class="watch-menu-item menu-realtime"
+                    onclick="changeWatchStatus('${item.videoId}','realtime')">
+                    リアタイ
+                  </div>
+                ` : ""}
+                              
               </div>
-              
+            
             </div>
-
+            
           </div>
-        </td>
+
       `;    
 
-    tbody.appendChild(tr);
+    list.appendChild(card);
   });
 
   updateStats(filtered);
