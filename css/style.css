@@ -271,7 +271,6 @@ thead th {
   background: white;
   border-left: 4px solid var(--member-color1);
 
-  top:20px;
   overflow: hidden;
   border-radius: 10px;
 
@@ -706,16 +705,6 @@ thead th {
   cursor: pointer;
   transition: 0.2s;
 }
-/*
-.tab.active {
-  background: var(--member-color1) 50%;
-  color: white;
-  font-weight: bold;
-  border: 2px solid var(--member-color2) 50%;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-  position: sticky;
-}
-*/
 
 .tab.active {
   background: color-mix(
@@ -731,7 +720,6 @@ thead th {
     white
   );
   box-shadow: 0 3px 9px rgba(0, 0, 0, 0.2);
-  position: sticky;
 }
 
 .tab:hover:not(.active) {
