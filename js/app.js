@@ -145,8 +145,8 @@ document.getElementById("checkAll").addEventListener("click", () => {
     return;
   }
 
-  document.querySelectorAll("#list tbody tr").forEach(tr => {
-    const id = tr.dataset.id;
+  document.querySelectorAll("#list .card").forEach(card => {
+    const id = card.dataset.id;
     if (id) {
       localStorage.setItem(
         `${currentMember.memberId}_${id}`,
@@ -162,8 +162,8 @@ document.getElementById("uncheckAll").addEventListener("click", () => {
   if (!confirm("表示されている動画の視聴チェックをすべて解除します。よろしいですか？")) {
     return;
   }
-  document.querySelectorAll("#list tbody tr").forEach(tr => {
-    const id = tr.dataset.id;
+  document.querySelectorAll("#list .card").forEach(card => {
+    const id = card.dataset.id;
     if (id) {
       localStorage.setItem(
         `${currentMember.memberId}_${id}`,
