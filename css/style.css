@@ -635,11 +635,6 @@ thead th {
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
 }
 
-.member-info {
-  flex: 1;
-  text-align: left;
-}
-
 .member-header-name {
   color: #fff;
   font-size: 1.2rem;
