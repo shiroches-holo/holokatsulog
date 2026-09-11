@@ -28,30 +28,6 @@ header {
   z-index: 100;
 }
 
-h1 {
-  font-size: 22px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
-}
-
-.header-row {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-/*
-.logo-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 8px;
-  background: #fff;
-}
-*/
-
 .logo-row {
   display: flex;
   align-items: center;
@@ -63,12 +39,6 @@ h1 {
 .header-logo {
   height: 56px;
   width: auto;
-}
-
-.header-note-top {
-  font-size: 12px;
-  color: #888;
-  white-space: nowrap;
 }
 
 .logo-area {
@@ -126,86 +96,7 @@ h1 {
   }
 }
 
-/* ---------- テーブル ---------- */
-
-table {
-  background: white;
-  border-radius: 10px;
-  overflow: hidden;
-  box-shadow: 0 6px 16px rgba(255, 150, 180, 0.25);
-  width: 100%;
-  border-collapse: collapse;
-}
-
-th,
-td {
-  font-size: 15px;
-  border: none;
-  padding: 8px;
-}
-
-#list td {
-  background: color-mix(
-    in srgb,
-    var(--member-color1) 12%,
-    white
-  );
-}
-
-#list td:hover {
-  background: color-mix(
-    in srgb,
-    var(--member-color3) 50%,
-    white
-  );
-}
-
-thead th {
-  position: sticky;
-  top: 0;
-  background: #e3e8ef;
-}
-
-.time-cell {
-  text-align: right;
-  white-space: nowrap;
-  font-variant-numeric: tabular-nums;
-}
-
-#list th:nth-child(5),
-#list td:nth-child(5) {
-  white-space: normal;
-  word-break: break-word;
-}
-
-.check-cell {
-  text-align: center;
-}
-
-#list tbody td {
-  padding: 0;
-}
-
 /* ---------- コントロール ---------- */
-
-#controls {
-  position: sticky;
-  top: 0;
-  z-index: 10;
-  background: white;
-  border-radius: 10px;
-  padding: 6px;
-  margin-bottom: 15px;
-  box-shadow: 0 4px 12px rgba(255, 160, 180, 0.2);
-  display: flex;
-  justify-content: space-between;
-}
-
-#controls input,
-#controls select,
-#controls button {
-  font-size: 16px;
-}
 
 .controls-left {
   flex: 1;
@@ -271,7 +162,6 @@ thead th {
   background: white;
   border-left: 4px solid var(--member-color1);
 
-  top:20px;
   overflow: hidden;
   border-radius: 10px;
 
@@ -585,23 +475,6 @@ thead th {
 }
 
 /* ---------- ヘッダー内ホロメン選択 ---------- */
-/*
-.member-selector {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  border: none;
-  padding: 12px 16px;
-  background: linear-gradient(
-    135deg,
-    var(--member-color1),
-    var(--member-color2),
-    var(--member-color3)
-  );
-  cursor: pointer;
-}
-*/
 
 .member-selector {
   width: 100%;
@@ -706,16 +579,6 @@ thead th {
   cursor: pointer;
   transition: 0.2s;
 }
-/*
-.tab.active {
-  background: var(--member-color1) 50%;
-  color: white;
-  font-weight: bold;
-  border: 2px solid var(--member-color2) 50%;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-  position: sticky;
-}
-*/
 
 .tab.active {
   background: color-mix(
@@ -731,7 +594,6 @@ thead th {
     white
   );
   box-shadow: 0 3px 9px rgba(0, 0, 0, 0.2);
-  position: sticky;
 }
 
 .tab:hover:not(.active) {
