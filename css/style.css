@@ -271,6 +271,7 @@ thead th {
   background: white;
   border-left: 4px solid var(--member-color1);
 
+  top:20px
   overflow: hidden;
   border-radius: 10px;
 
