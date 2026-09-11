@@ -28,30 +28,6 @@ header {
   z-index: 100;
 }
 
-h1 {
-  font-size: 22px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
-}
-
-.header-row {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-/*
-.logo-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 8px;
-  background: #fff;
-}
-*/
-
 .logo-row {
   display: flex;
   align-items: center;
@@ -63,12 +39,6 @@ h1 {
 .header-logo {
   height: 56px;
   width: auto;
-}
-
-.header-note-top {
-  font-size: 12px;
-  color: #888;
-  white-space: nowrap;
 }
 
 .logo-area {
@@ -187,25 +157,6 @@ thead th {
 }
 
 /* ---------- コントロール ---------- */
-
-#controls {
-  position: sticky;
-  top: 0;
-  z-index: 10;
-  background: white;
-  border-radius: 10px;
-  padding: 6px;
-  margin-bottom: 15px;
-  box-shadow: 0 4px 12px rgba(255, 160, 180, 0.2);
-  display: flex;
-  justify-content: space-between;
-}
-
-#controls input,
-#controls select,
-#controls button {
-  font-size: 16px;
-}
 
 .controls-left {
   flex: 1;
@@ -584,23 +535,6 @@ thead th {
 }
 
 /* ---------- ヘッダー内ホロメン選択 ---------- */
-/*
-.member-selector {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  border: none;
-  padding: 12px 16px;
-  background: linear-gradient(
-    135deg,
-    var(--member-color1),
-    var(--member-color2),
-    var(--member-color3)
-  );
-  cursor: pointer;
-}
-*/
 
 .member-selector {
   width: 100%;
