@@ -13,50 +13,50 @@ async function loadMembers() {
 
   try {
 
-  console.time("fetch all");
-  
-  const [membersRes, groupsRes] =
-    await Promise.all([
-      fetch(`${API_URL}?type=members`),
-      fetch(`${API_URL}?type=groups`)
-    ]);
-  
-  members = await membersRes.json();
-  groupsMaster = await groupsRes.json();
-  
-  console.timeEnd("fetch all");
-    
+    console.time("fetch all");
+
+    const [membersRes, groupsRes] =
+      await Promise.all([
+        fetch(`${API_URL}?type=members`),
+        fetch(`${API_URL}?type=groups`)
+      ]);
+
+    members = await membersRes.json();
+    groupsMaster = await groupsRes.json();
+
+    console.timeEnd("fetch all");
+
     console.time("buildMemberList");
     buildMemberList();
     console.timeEnd("buildMemberList");
 
     const lastMember =
       localStorage.getItem("selectedMember");
-    
+
     if (!lastMember) {
-    
+
       document.getElementById("loading").style.display = "none";
-    
+
       document.getElementById("memberModal").style.display =
         "block";
-    
+
       return;
     }
-           
+
     await loadMember(lastMember);
 
-    } catch (err) {
-    
-      console.error(err);
-    
-      document.getElementById("loading")
-        .style.display = "none";
-    
-      showMessage(
-        "読込失敗",
-        "error"
-      );
-    }
+  } catch (err) {
+
+    console.error(err);
+
+    document.getElementById("loading")
+      .style.display = "none";
+
+    showMessage(
+      "読込失敗",
+      "error"
+    );
+  }
 }
 // -------------------- 共通関数 --------------------
 
@@ -438,13 +438,13 @@ async function loadMember(memberId) {
 
     // ✅ 仮で色先に変える（重要）
     const member = members.find(m => String(m.memberId) === memberId);
-    
+
     // ✅ 契約解除は非表示
     if (!member || member.memberStatus === "terminated") {
-    
+
       document.getElementById("loading")
         .style.display = "none";
-    
+
       return;
     }
 
@@ -459,14 +459,14 @@ async function loadMember(memberId) {
     }
 
     console.time("fetch member");
-    
+
     const response = await fetch(`${API_URL}?member=${memberId}`);
     const json = await response.json();
 
     console.timeEnd("fetch member");
-    
+
     // console.log(json);
-    
+
     currentMember = json.member;
     window.data = json.videos;
 
@@ -604,20 +604,20 @@ function createMemberCard(member) {
   `;
 
   // ✅ クリック
-  div.onclick = async() => {
+  div.onclick = async () => {
 
     localStorage.setItem(
       "selectedMember",
       member.memberId
     );
-  
+
     document.getElementById("memberModal")
       .style.display = "none";
-    
+
     await loadMember(member.memberId);
-  
+
   };
-  
+
   // ✅ ⭐
   const btn = div.querySelector(".favorite-btn");
   if (btn) {
@@ -808,6 +808,277 @@ document
     }
   );
 
+// ✅ ここでモーダルを開く
+function executeBulkChange() {
+
+  const status =
+    document.querySelector(
+      'input[name="bulkStatus"]:checked'
+    )?.value;
+
+  const dateMode =
+    document.querySelector(
+      'input[name="bulkDateMode"]:checked'
+    )?.value;
+
+  const customDate =
+    document.getElementById(
+      "bulkCustomDate"
+    ).value;
+
+  console.log({
+    status,
+    dateMode,
+    customDate
+  });
+
+  const cards =
+    document.querySelectorAll(
+      "#list .card"
+    );
+
+  let skippedCount = 0;
+
+  cards.forEach(card => {
+
+    const videoId =
+      card.dataset.id;
+
+    const video =
+      window.data.find(
+        x => x.videoId === videoId
+      );
+
+    if (
+      status === "realtime" &&
+      video.videoType === "SHORT"
+    ) {
+      skippedCount++;
+      return;
+    }
+
+    let date = null;
+
+    if (status === "watched") {
+
+      date =
+        dateMode === "custom"
+          ? customDate
+          : new Date(video.publishedAt)
+            .toLocaleDateString("sv-SE");
+
+    }
+
+    if (status === "realtime") {
+
+      date =
+        new Date(video.publishedAt)
+          .toLocaleDateString("sv-SE");
+
+    }
+
+    saveWatchLog(
+      videoId,
+      {
+        status,
+        date
+      }
+    );
+
+  });
+
+  render();
+
+  const updatedCount =
+    cards.length - skippedCount;
+
+  showMessage(
+    skippedCount > 0
+      ? `${updatedCount}件変更（Shorts ${skippedCount}件除外）`
+      : `${updatedCount}件変更しました`
+  );
+
+  document
+    .getElementById("bulkWatchModal")
+    .classList.remove("show");
+
+}
+
+// 一括変更モーダル
+document
+  .getElementById("bulkWatchBtn")
+  .addEventListener("click", () => {
+
+    const targetCount =
+      document.querySelectorAll("#list .card").length;
+
+    document.getElementById("bulkTargetCount")
+      .textContent = `対象動画：${targetCount}件`;
+
+    document
+      .getElementById("bulkWatchModal")
+      .classList.add("show");
+
+  });
+
+// 一括変更モーダルの閉じる
+document
+  .getElementById("bulkCancelBtn")
+  .addEventListener("click", () => {
+
+    document
+      .getElementById("bulkWatchModal")
+      .classList.remove("show");
+
+  });
+
+document
+  .getElementById("bulkChangeBtn")
+  .addEventListener("click", () => {
+
+    const status =
+      document.querySelector(
+        'input[name="bulkStatus"]:checked'
+      )?.value;
+
+    if (!status) {
+
+      showMessage(
+        "視聴状態を選択してください",
+        "error"
+      );
+
+      return;
+    }
+
+    const targetCount =
+      document.querySelectorAll(
+        "#list .card"
+      ).length;
+
+    const statusLabels = {
+      unwatched: "未視聴",
+      watched: "視聴済み",
+      realtime: "リアタイ",
+      partial: "途中"
+    };
+
+    let message = "";
+
+    if (status === "realtime") {
+
+      message =
+        `${targetCount}件を「リアタイ」に変更します。\n` +
+        `Shortsは対象外です。\n` +
+        `よろしいですか？`;
+
+    } else {
+
+      message =
+        `${targetCount}件を「${statusLabels[status]}」に変更します。\n` +
+        `よろしいですか？`;
+
+    }
+
+    document
+      .getElementById("confirmMessage")
+      .textContent = message;
+
+    document
+      .getElementById("confirmModal")
+      .classList.add("show");
+
+  });
+
+document
+  .getElementById("confirmCancelBtn")
+  .addEventListener("click", () => {
+
+    document
+      .getElementById("confirmModal")
+      .classList.remove("show");
+
+  });
+
+document
+  .getElementById("confirmOkBtn")
+  .addEventListener("click", () => {
+
+    document
+      .getElementById("confirmModal")
+      .classList.remove("show");
+
+    executeBulkChange();
+
+  });
+
+document
+  .querySelectorAll(
+    'input[name="bulkStatus"]'
+  )
+  .forEach(radio => {
+
+    radio.addEventListener(
+      "change",
+      updateBulkDateState
+    );
+
+  });
+
+function updateBulkDateState() {
+
+  console.log("status changed");
+
+  const status =
+    document.querySelector(
+      'input[name="bulkStatus"]:checked'
+    )?.value;
+
+  console.log(status);
+
+  const area =
+    document.getElementById(
+      "bulkDateOptions"
+    );
+
+  const help =
+    document.getElementById(
+      "bulkDateHelp"
+    );
+
+  if (status === "watched") {
+
+    area.classList.remove(
+      "disabled-area"
+    );
+
+    help.textContent =
+      "視聴日を設定します";
+
+  } else if (
+    status === "realtime"
+  ) {
+
+    area.classList.add(
+      "disabled-area"
+    );
+
+    help.textContent =
+      "リアタイは動画配信日・公開日が自動設定されます";
+
+  } else {
+
+    area.classList.add(
+      "disabled-area"
+    );
+
+    help.textContent =
+      "未視聴・途中では日付設定されません";
+
+  }
+
+}
+
 function changeWatchDate(videoId) {
 
   const watchLog =
@@ -816,38 +1087,40 @@ function changeWatchDate(videoId) {
   if (watchLog.status !== "watched") {
     return;
   }
-const picker =
-  document.getElementById(
-    "watchDatePicker"
-  );
+  const picker =
+    document.getElementById(
+      "watchDatePicker"
+    );
 
-picker.value =
-  watchLog.date ||
-  new Date()
-    .toISOString()
-    .slice(0, 10);
+  picker.value =
+    watchLog.date ||
+    new Date()
+      .toISOString()
+      .slice(0, 10);
 
-picker.onchange = () => {
+  picker.onchange = () => {
 
-  saveWatchLog(
-    videoId,
-    {
-      ...watchLog,
-      date: picker.value
-    }
-  );
+    saveWatchLog(
+      videoId,
+      {
+        ...watchLog,
+        date: picker.value
+      }
+    );
 
-  render();
-};
+    render();
+  };
 
-console.log("picker", picker);
-console.log("showPicker", typeof picker.showPicker);
-picker.focus();
+  console.log("picker", picker);
+  console.log("showPicker", typeof picker.showPicker);
+  picker.focus();
 
-if (picker.showPicker) {
-  picker.showPicker();
-} else {
-  picker.click();
+  if (picker.showPicker) {
+    picker.showPicker();
+  } else {
+    picker.click();
+  }
+
 }
 
-}
+
