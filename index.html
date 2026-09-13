@@ -1,6 +1,9 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+	<link rel="stylesheet"
+		href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" />
+
 	<title>ホロ活ログ</title>
 
 	<!-- Google tag (gtag.js) -->
@@ -24,46 +27,44 @@
 <body>
 	<main>
 		<div id="page-library" class="page active">
-			
+
 			<header id="appHeader">
-	
+
 				<div class="logo-row">
 					<div class="logo-area">
 						<img src="images/【ヘッダーロゴ】ホロ活ログ-背景透過.png" alt="ホロ活ログ" class="header-logo">
 					</div>
-	
+
 				</div>
-	
+
 				<button id="memberSelectBtn" class="member-selector">
-	
+
 					<img id="memberIcon" class="member-icon" src="" alt="">
-	
+
 					<div class="member-info">
 						<div id="memberName" class="member-header-name">
 							読み込み中...
 						</div>
-	
+
 						<div id="memberFanName" class="member-fanname">
 						</div>
 					</div>
-	
+
 				</button>
-	
+
 			</header>
-	
+
 			<div id="loading">
-			
-			  <div
-			    id="loadingSpinner"
-			    class="spinner hidden">
-			  </div>
-			
-			  <div id="loadingText">
-			    読み込み中...
-			  </div>
-			
+
+				<div id="loadingSpinner" class="spinner hidden">
+				</div>
+
+				<div id="loadingText">
+					読み込み中...
+				</div>
+
 			</div>
-	
+
 			<!-- タブフィルタ -->
 			<div class="type-tabs">
 				<button class="tab active" data-type="all">全て</button>
@@ -71,38 +72,38 @@
 				<button class="tab" data-type="video">動画</button>
 				<button class="tab" data-type="short">Shorts</button>
 			</div>
-	
+
 			<!-- ✅ stats 横並びエリア -->
 			<div id="stats"></div>
-	
+
 			<div class="search-bar">
-	
+
 				<input type="text" id="search" placeholder="🔍 キーワードで検索">
-	
+
 				<button id="filterOpenBtn" class="filter-btn">
 					⚙ 条件
 				</button>
-	
+
 			</div>
-	
+
 			<div id="filterModal" class="modal">
-	
+
 				<div class="modal-content">
-	
+
 					<div class="modal-header">
 						<h2>検索条件</h2>
 						<span id="closeFilterModal" class="close-btn">×</span>
 					</div>
-	
+
 					<div id="filterContent">
 						<div class="controls-left">
-	
+
 							<select id="filterStatus">
 								<option value="all">すべて</option>
 								<option value="watched">視聴済み</option>
 								<option value="unwatched">未視聴</option>
 							</select>
-	
+
 							<select id="sort">
 								<option value="new">公開日（新→旧）</option>
 								<option value="old">公開日（旧→新）</option>
@@ -111,7 +112,7 @@
 								<option value="long">時間（長い順）</option>
 								<option value="short">時間（短い順）</option>
 							</select>
-	
+
 							<select id="durationLimit">
 								<option value="">全時間</option>
 								<option value="30">30分以内</option>
@@ -128,95 +129,95 @@
 								<option value="660">11時間以内</option>
 								<option value="720">12時間以内</option>
 							</select>
-	
+
 							<div class="range-group">
 								<div class="range-group">
 									<input type="text" id="dateFrom" placeholder="年/月/日" onfocus="
-							this.type='date';
-							setTimeout(() => this.showPicker && this.showPicker(), 0);
-						" onblur="
-							if(!this.value)this.type='text'
-						">
-	
+								this.type='date';
+								setTimeout(() => this.showPicker && this.showPicker(), 0);
+								" onblur="
+								if(!this.value)this.type='text'
+								">
+
 									<span>～</span>
-	
+
 									<input type="text" id="dateTo" placeholder="年/月/日" onfocus="
-							this.type='date';
-							setTimeout(() => this.showPicker && this.showPicker(), 0);
-						" onblur="
-							if(!this.value)this.type='text'
-						">
+								this.type='date';
+								setTimeout(() => this.showPicker && this.showPicker(), 0);
+								" onblur="
+								if(!this.value)this.type='text'
+								">
 								</div>
 							</div>
-	
-						    <div class="btn-group">
-						      <button id="resetAll">条件リセット</button>
-						    </div>
-				
-						  </div>
-				
-						  <div class="controls-right">   
-						    <button id="toTop">🔼</button>
-						    <button id="toBottom">🔽</button>
-						    <button id="checkAll">表示全☑</button>
-						    <button id="uncheckAll">全☑解除</button>
-						  </div>
+
+							<div class="btn-group">
+								<button id="resetAll">条件リセット</button>
+							</div>
+
 						</div>
-	
-						<details id="playlistBox">
-							<summary>再生リスト選択</summary>
-							<input type="text" id="playlistSearch" placeholder="再生リスト検索">
-	
-							<button id="playlistAll">全て✔</button>
-							<button id="playlistClear">全て解除</button>
-	
-							<div id="playlistFilterArea"></div>
-						</details>
+
+						<div class="controls-right">
+							<button id="toTop">🔼</button>
+							<button id="toBottom">🔽</button>
+							<button id="checkAll">表示全☑</button>
+							<button id="uncheckAll">全☑解除</button>
+						</div>
 					</div>
-	
+
+					<details id="playlistBox">
+						<summary>再生リスト選択</summary>
+						<input type="text" id="playlistSearch" placeholder="再生リスト検索">
+
+						<button id="playlistAll">全て✔</button>
+						<button id="playlistClear">全て解除</button>
+
+						<div id="playlistFilterArea"></div>
+					</details>
 				</div>
 
+			</div>
+
 			<div id="memberModal" class="modal">
-	
+
 				<div class="modal-content">
-	
+
 					<div class="modal-header">
 						<h2>ホロメンを選択</h2>
 						<span id="closeMemberModal" class="close-btn">×</span>
 					</div>
-	
+
 					<input id="memberSearch" placeholder="🔍️名前で検索">
-	
+
 					<h3 id="favTitle">⭐️ お気に入り</h3>
 					<div id="favoriteMembers" class="member-grid"></div>
-	
+
 					<h3>すべてのホロメン</h3>
 					<div id="allMembers" class="member-grid"></div>
-	
+
 				</div>
-	
+
 			</div>
-	
-			
-			<!-- ✅ controls は1個だけ -->		
+
+
+			<!-- ✅ controls は1個だけ -->
 			<div class="playlist-header">
-	
+
 				<!-- ヘルプ［概要・使い方・バージョン情報・制作者］ -->
 				<!--
-				<button id="helpBtn">❓ヘルプ</button>
-				-->
+			<button id="helpBtn">❓ヘルプ</button>
+			-->
 				<div id="helpModal">
 					<div class="modal-content">
-	
+
 						<div class="tab-buttons">
 							<button data-tab="about">概要</button>
 							<button data-tab="howto">使い方</button>
 							<button data-tab="version">バージョン</button>
 							<button data-tab="author">制作者</button>
 						</div>
-	
+
 						<div class="tab-content">
-	
+
 							<div class="tab-panel" id="about">
 								<h3>概要</h3>
 								<p>
@@ -225,91 +226,91 @@
 									動画時間や視聴時間の表示も行っており、
 									ご自身の視聴状況を確認することが可能です。
 								</p>
-	
+
 								<p style="margin-top:12px;">
 									<strong>※注意</strong><br>
 									データはYouTubeのライブ一覧をもとに取得しています。<br>
 									一部、配信以外の動画（オリ曲・歌・Shortsなど）が含まれる場合があります。<br>
 									配信時間のみを確認したい場合は、
 									検索機能や再生リストでの絞り込みをご利用ください。<br><br>
-	
+
 									動画数が多い場合、
 									初回読み込みや検索・並び替え時に表示まで時間がかかる場合があります。
 								</p>
 							</div>
-	
+
 							<div class="tab-panel" id="howto" style="display:none;">
 								<h3>使い方</h3>
-	
+
 								<ul>
 									<li>
 										<strong>タイトル検索：</strong>
 										「タイトル検索」欄で動画タイトルを絞り込みできます
 									</li>
-	
+
 									<li>
 										<strong>視聴状態：</strong>
 										「すべて / 視聴済み / 未視聴」で表示切替できます
 									</li>
-	
+
 									<li>
 										<strong>並び替え：</strong>
 										「公開日（新→旧）」などから公開日・タイトル・動画時間順に変更できます
 									</li>
-	
+
 									<li>
 										<strong>時間フィルタ：</strong>
 										「全時間」から動画時間で絞り込みできます
 									</li>
-	
+
 									<li>
 										<strong>公開日範囲：</strong>
 										「年/月/日」から公開日の期間指定ができます
 									</li>
-	
+
 									<li>
 										<strong>再生リスト選択：</strong>
 										再生リストごとの表示切替や検索ができます
 									</li>
-	
+
 									<li>
 										<strong>視聴管理：</strong>
 										チェック☑を付けることで視聴済み管理ができます
 									</li>
-	
+
 									<li>
 										<strong>一括操作：</strong><br>
 										「表示全☑」で表示中の動画をまとめてチェックできます<br>
 										「全☑解除」で一括解除できます
 									</li>
-	
+
 									<li>
 										<strong>移動ボタン：</strong>
 										「🔼」でページ上部、「🔽」でページ下部へ移動できます
 									</li>
-	
+
 									<li>
 										<strong>条件リセット：</strong>
 										「条件リセット」で検索条件を初期状態に戻せます
 									</li>
-	
+
 									<li>
 										<strong>データ移行：</strong>
 										「エクスポート / インポート」で視聴データを保存・復元できます
 									</li>
-	
+
 									<li>
 										<strong>リンク：</strong>
 										動画タイトルや再生リスト名を押すと、
 										YouTubeを別タブで開きます
 									</li>
 								</ul>
-	
+
 								<p style="margin-top:12px;">
 									<strong>※視聴データについて</strong><br>
 									視聴チェックのデータは、ご利用中のブラウザごとに保存されます。<br>
 									別端末・別ブラウザではデータは引き継がれません。<br><br>
-	
+
 									データを移行したい場合は、
 									「エクスポート / インポート」機能をご利用ください。
 								</p>
@@ -323,19 +324,19 @@
 										<strong>v1.1.0</strong>
 										<span class="date">（2026/05/19）</span>
 									</div>
-	
+
 									<ul class="version-list">
 										<li>スマホUI追加</li>
 										<li>全体のUI改善</li>
 									</ul>
 								</div>
-	
+
 								<div class="version-item">
 									<div class="version-header">
 										<strong>v1.0.0</strong>
 										<span class="date">（2026/05/15）</span>
 									</div>
-	
+
 									<ul class="version-list">
 										<li>初版リリース</li>
 									</ul>
@@ -343,7 +344,7 @@
 							</div>
 							<div class="tab-panel" id="author" style="display:none;">
 								<h3>制作者</h3>
-	
+
 								<p>
 									<strong>白ちぇす</strong><br>
 									X（旧Twitter）:
@@ -358,7 +359,7 @@
 								</p>
 								<strong>▼ 不具合報告の際のお願い</strong><br>
 								以下の内容を記載いただけると助かります：<br><br>
-	
+
 								・発生している現象（例：表示が崩れる / チェックが保存されない など）<br>
 								・操作手順（どの操作をしたときに発生したか）<br>
 								・使用環境（スマホ / PC、ブラウザなど）<br>
@@ -368,20 +369,24 @@
 								</p>
 							</div>
 						</div>
-	
+
 						<button id="closeHelp">閉じる</button>
-	
+
 					</div>
 				</div>
 			</div>
-	
+
 			<div class="list-header">
-	
+
 				<div id="message"></div>
-	
+
 				<p>動画一覧</p>
-		
-				<details class="data-transfer">
+
+				<button id="bulkWatchBtn">
+					📝一括変更
+				</button>
+
+				<details class="data-transfer" style="display:none;">
 					<summary>視聴☑データ移行</summary>
 					<button id="exportBtn">エクスポート</button>
 					<button id="importBtn">インポート</button>
@@ -392,91 +397,192 @@
 				</details>
 			</div>
 			<div id="list"></div>
-	
-				<!-- JS -->
-				<script src="js/config.js"></script>
-				<script src="js/util.js"></script>
-				<script src="js/render.js"></script>
-				<script src="js/navigation.js"></script>
-				<script src="js/app.js"></script>
-			
+
 		</div> <!-- page-library -->
-			<div id="page-oshilog" class="page">
-			  <h2>📊 推しログ</h2>
-			  <p>開発中...</p>
-			</div>
-			
-			<div id="page-other" class="page">
-			  <h2>📖 その他</h2>
-			  <p>開発中...</p>
-			</div>
-			
-			<div id="page-setting" class="page">
-			  <h2>⚙️ 設定</h2>
-			  <p>開発中...</p>
-			</div>
-		
+		<div id="page-oshilog" class="page">
+			<h2>📊 推しログ</h2>
+			<p>開発中...</p>
+		</div>
+
+		<div id="page-other" class="page">
+			<h2>📖 その他</h2>
+			<p>開発中...</p>
+		</div>
+
+		<div id="page-setting" class="page">
+			<h2>⚙️ 設定</h2>
+			<p>開発中...</p>
+		</div>
+
 	</main>
 
 	<nav class="bottom-nav">
-	
-	  <button
-	    class="nav-btn active"
-	    data-page="library">
-	    <span class="icon">📚</span>
-	    <span class="label">ライブラリ</span>
-	  </button>
-	
-	  <button
-	    class="nav-btn"
-	    data-page="oshilog">
-	    <span class="icon">📊</span>
-	    <span class="label">推しログ</span>
-	  </button>
-	
-	  <button
-	    class="nav-btn"
-	    data-page="other">
-	    <span class="icon">📖</span>
-	    <span class="label">その他</span>
-	  </button>
-	
-	  <button
-	    class="nav-btn"
-	    data-page="setting">
-	    <span class="icon">⚙️</span>
-	    <span class="label">設定</span>
-	  </button>
-	
+
+		<button class="nav-btn active" data-page="library">
+			<span class="material-symbols-rounded">
+				video_library
+			</span>
+			<span class="label">ライブラリ</span>
+		</button>
+
+		<button class="nav-btn" data-page="oshilog">
+			<span class="material-symbols-rounded">
+				analytics
+			</span>
+			<span class="label">推しログ</span>
+		</button>
+
+		<button class="nav-btn" data-page="other">
+			<span class="material-symbols-rounded">
+				apps
+			</span>
+			<span class="label">その他</span>
+		</button>
+
+		<button class="nav-btn" data-page="setting">
+			<span class="material-symbols-rounded">
+				settings
+			</span>
+			<span class="label">設定</span>
+		</button>
+
 	</nav>
 
 	<div id="watchModal" class="modal hidden">
-	  <div class="modal-content">
-	
-	    <h3>視聴状態</h3>
-	
-	    <div id="watchOptions"></div>
-	
-	    <button onclick="closeWatchModal()">
-	      閉じる
-	    </button>
-	
-	  </div>
+
+		<div class="modal-content">
+
+			<h3>視聴状態</h3>
+
+			<div id="watchOptions"></div>
+
+			<button onclick="closeWatchModal()">
+				閉じる
+			</button>
+
+		</div>
+
 	</div>
-	
-<input
-  type="date"
-  id="watchDatePicker"
-  style="
-    position:fixed;
-    top:0;
-    left:0;
-    opacity:0;
-    pointer-events:none;
-    width:1px;
-    height:1px;
-  "
->	
+
+	<div id="bulkWatchModal" class="modal">
+
+		<div class="modal-content">
+
+			<h3 class="bulk-modal-title">
+				視聴状態一括変更
+			</h3>
+
+			<div id="bulkTargetCount" class="bulk-target">
+				対象動画：0件
+			</div>
+
+			<div class="bulk-status-options">
+
+				<label>
+					<input type="radio" name="bulkStatus" value="unwatched" checked>
+					未視聴
+				</label>
+
+				<label>
+					<input type="radio" name="bulkStatus" value="watched">
+					視聴済み
+				</label>
+
+				<label>
+					<input type="radio" name="bulkStatus" value="realtime">
+					リアタイ
+				</label>
+
+				<label>
+					<input type="radio" name="bulkStatus" value="partial">
+					途中
+				</label>
+
+			</div>
+
+			<div id="bulkDateOptions" class="disabled-area">
+
+				<p>日付設定</p>
+
+				<label>
+					<input type="radio" name="bulkDateMode" value="custom" checked>
+					カスタム日付
+				</label>
+
+				<label>
+					<input type="radio" name="bulkDateMode" value="publish">
+					動画配信日・公開日
+				</label>
+
+				<input type="date" id="bulkCustomDate">
+
+				<div id="bulkDateHelp" class="bulk-date-help">
+					視聴済みを選択すると日付設定できます
+				</div>
+
+			</div>
+
+			<div class="bulk-modal-buttons">
+
+				<button id="bulkChangeBtn">
+					変更
+				</button>
+
+				<button id="bulkCancelBtn">
+					キャンセル
+				</button>
+
+			</div>
+
+		</div>
+
+	</div>
+
+	<div id="confirmModal" class="confirm-modal">
+
+		<div class="confirm-content">
+
+			<div class="confirm-title">
+				視聴状態変更確認
+			</div>
+
+			<div id="confirmMessage" class="confirm-message">
+			</div>
+
+			<div class="confirm-buttons">
+
+				<button id="confirmCancelBtn" class="confirm-cancel">
+					キャンセル
+				</button>
+
+				<button id="confirmOkBtn" class="confirm-ok">
+					変更する
+				</button>
+
+			</div>
+
+		</div>
+
+	</div>
+
+	<input type=" date" id="watchDatePicker" style="
+		position:fixed;
+		top:0;
+		left:0;
+		opacity:0;
+		pointer-events:none;
+		width:1px;
+		height:1px;
+	">
+
+	<!-- JS -->
+	<script src="js/config.js"></script>
+	<script src="js/util.js"></script>
+	<script src="js/render.js"></script>
+	<script src="js/navigation.js"></script>
+	<script src="js/app.js"></script>
+
+
 </body>
 
 </html>
