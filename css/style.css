@@ -3,22 +3,18 @@
 ================================================================================= */
 
 body {
-  background: color-mix(
-    in srgb,
-    var(--member-color3) 12%,
-    white
-  );
+  background: color-mix(in srgb,
+      var(--member-color3) 12%,
+      white);
 }
 
 /* ---------- ヘッダー ---------- */
 
 header {
-   background: linear-gradient(
-    to bottom,
-    #fe68ad 0%,
-    #f09cc0 40%,
-    #ffacd3 100%
-  );
+  background: linear-gradient(to bottom,
+      #fe68ad 0%,
+      #f09cc0 40%,
+      #ffacd3 100%);
   box-sizing: border-box;
   border-bottom: 2px solid rgba(255, 255, 255, 0.5);
   padding: 12px 14px;
@@ -75,11 +71,9 @@ header {
   width: 48px;
   height: 48px;
   border-radius: 50%;
-  background: conic-gradient(
-    var(--member-color1),
-    var(--member-color2),
-    transparent 70%
-  );
+  background: conic-gradient(var(--member-color1),
+      var(--member-color2),
+      transparent 70%);
   -webkit-mask: radial-gradient(circle, transparent 58%, #000 60%);
   mask: radial-gradient(circle, transparent 58%, #000 60%);
   animation: spin 0.8s linear infinite;
@@ -113,6 +107,7 @@ header {
   display: flex;
   gap: 12px;
   flex-wrap: wrap;
+  padding: 0 6px;
   margin-bottom: 15px;
 }
 
@@ -168,7 +163,7 @@ header {
   margin: 0 8px 20px;
   padding: 12px;
 
-  box-shadow: 0 4px 10px rgba(0,0,0,.08);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, .08);
 }
 
 .card:hover {
@@ -233,6 +228,9 @@ header {
 }
 
 .list-header {
+  padding-left: 8px;
+  padding-right: 8px;
+  padding-bottom: 6px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -484,12 +482,10 @@ header {
   gap: 12px;
   border: none;
   padding: 12px 16px;
-  background: linear-gradient(
-    135deg,
-    var(--member-color1),
-    var(--member-color2),
-    var(--member-color3)
-  );
+  background: linear-gradient(135deg,
+      var(--member-color1),
+      var(--member-color2),
+      var(--member-color3));
   cursor: pointer;
 }
 
@@ -554,18 +550,16 @@ header {
 .type-tabs {
   display: flex;
   gap: 6px;
-  padding: 10px 0;
+  padding: 10px 4px;
   position: sticky;
   top: 123px;
-  border-top: 1px solid rgba(255,255,255,.5);
+  border-top: 1px solid rgba(255, 255, 255, .5);
   z-index: 99;
   background:
-    color-mix(
-      in srgb,
+    color-mix(in srgb,
       var(--member-color3) 12%,
-      white
-    );
-  box-shadow: 0 2px 6px rgba(0,0,0,.08);
+      white);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, .08);
 }
 
 .tab {
@@ -581,18 +575,14 @@ header {
 }
 
 .tab.active {
-  background: color-mix(
-    in srgb,
-    var(--member-color1) 60%,
-    white
-  );
+  background: color-mix(in srgb,
+      var(--member-color1) 60%,
+      white);
   color: #333;
   font-weight: bold;
-  border: 2px solid color-mix(
-    in srgb,
-    var(--member-color2) 30%,
-    white
-  );
+  border: 2px solid color-mix(in srgb,
+      var(--member-color2) 30%,
+      white);
   box-shadow: 0 3px 9px rgba(0, 0, 0, 0.2);
 }
 
@@ -761,4 +751,364 @@ header {
 .menu-realtime {
   color: #3b82f6;
   font-weight: 600;
+}
+
+/* ---------- 一括変更モーダル ---------- */
+
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+
+  justify-content: center;
+  align-items: center;
+
+  z-index: 1000;
+
+  display: none;
+}
+
+.modal.show {
+  display: flex;
+}
+
+.modal-content {
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  width: 92%;
+  max-width: 460px;
+}
+
+.bulk-status-options {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.bulk-modal-buttons {
+  display: flex;
+  justify-content: center;
+  /* 中央 */
+  gap: 12px;
+
+  margin-top: 20px;
+}
+
+#bulkWatchBtn:hover {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 6px 14px rgba(0, 0, 0, .15);
+}
+
+/* -------------------- キャンセルボタン ---------------------------- */
+#bulkCancelBtn {
+
+  background: rgb(233, 230, 230);
+
+  border: 1px solid #d1d5db;
+
+  color: #374151;
+
+  box-shadow:
+    0 2px 6px rgba(0, 0, 0, .08);
+}
+
+/* -------------------- 変更ボタン ---------------------------- */
+#bulkChangeBtn {
+
+  background: rgb(233, 230, 230);
+
+  border: 1px solid #d1d5db;
+
+  color: #374151;
+
+  box-shadow:
+    0 2px 6px rgba(0, 0, 0, .08);
+}
+
+.bulk-modal-buttons button {
+
+  width: 120px;
+  height: 42px;
+
+  border-radius: 10px;
+
+  font-weight: 700;
+}
+
+#bulkWatchModal {
+  position: fixed;
+  inset: 0;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, .5);
+  z-index: 99999;
+}
+
+.disabled-area {
+  opacity: 0.4;
+  pointer-events: none;
+  filter: grayscale(1);
+}
+
+.bulk-modal-title {
+  font-size: 22px;
+  font-weight: 700;
+
+  margin-bottom: 12px;
+
+  color: #374151;
+
+  padding-bottom: 10px;
+
+  border-bottom: 3px solid var(--member-color1);
+}
+
+.bulk-target {
+  display: inline-block;
+
+  margin-bottom: 16px;
+
+  padding: 8px 14px;
+
+  border-radius: 999px;
+
+  background: linear-gradient(135deg,
+      var(--member-color1),
+      var(--member-color2));
+
+  color: white;
+
+  font-size: 14px;
+  font-weight: 700;
+
+  box-shadow:
+    0 4px 12px rgba(0, 0, 0, .15);
+}
+
+.modal-content {
+  background:
+    linear-gradient(180deg,
+      rgba(255, 255, 255, 1) 0%,
+      rgba(252, 248, 255, 1) 100%);
+
+  border-radius: 20px;
+
+  border-top: 5px solid var(--member-color1);
+
+  box-shadow:
+    0 20px 50px rgba(0, 0, 0, .18);
+}
+
+/* =================================================================================
+   確認モーダル
+=================================================================================== */
+
+.confirm-modal {
+  position: fixed;
+  inset: 0;
+
+  background: rgba(0, 0, 0, 0.5);
+
+  display: none;
+  align-items: center;
+  justify-content: center;
+
+  z-index: 100000;
+}
+
+.confirm-modal.show {
+  display: flex;
+}
+
+.confirm-content {
+  width: 90%;
+  max-width: 380px;
+
+  background: #fff;
+  border-radius: 16px;
+  padding: 24px;
+
+  animation: modalFadeIn .2s ease;
+
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, .15);
+}
+
+.confirm-title {
+  font-size: 20px;
+  font-weight: 700;
+
+  margin-bottom: 16px;
+
+  color: #333;
+}
+
+.confirm-message {
+  line-height: 1.8;
+  color: #555;
+
+  white-space: pre-line;
+
+  margin-bottom: 24px;
+}
+
+.confirm-buttons {
+  display: flex;
+  gap: 12px;
+
+  justify-content: flex-end;
+}
+
+.confirm-cancel {
+  border: none;
+
+  background: #e5e7eb;
+  color: #374151;
+
+  padding: 10px 18px;
+
+  border-radius: 10px;
+
+  cursor: pointer;
+}
+
+.confirm-ok {
+  border: none;
+
+  background: linear-gradient(135deg,
+      var(--member-color1),
+      var(--member-color2));
+
+  color: white;
+
+  padding: 10px 18px;
+
+  border-radius: 10px;
+
+  font-weight: 700;
+
+  cursor: pointer;
+}
+
+.confirm-cancel:hover,
+.confirm-ok:hover {
+  opacity: .9;
+}
+
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(.95);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* =================================================================================
+    アイコン
+=================================================================================== */
+.material-symbols-rounded {
+  font-variation-settings:
+    "FILL" 0,
+    "wght" 400,
+    "GRAD" 0,
+    "opsz" 24;
+}
+
+.bottom-nav button.active {
+  color: var(--member-color1);
+}
+
+.bottom-nav button.active .material-symbols-rounded {
+  color: var(--member-color1);
+  transform: scale(1.15);
+}
+
+/* =================================================================================
+   ナビゲーション
+================================================================================= */
+
+.bottom-nav {
+  left: 16px;
+  right: 16px;
+  bottom: 16px;
+
+  border-radius: 24px;
+  height: 64px;
+
+  box-shadow:
+    0 10px 30px rgba(0,0,0,.12);
+}
+
+.nav-btn {
+
+  flex: 1;
+
+  display: flex;
+  flex-direction: column;
+
+  justify-content: center;
+  align-items: center;
+
+  gap: 2px;
+
+  background: none;
+  border: none;
+
+  color: #666;
+
+  transition: .2s;
+
+  border-radius: 14px;
+
+  margin: 4px;
+}
+
+.nav-btn .material-symbols-rounded {
+
+  font-size: 24px;
+
+  font-variation-settings:
+    "FILL" 0,
+    "wght" 400,
+    "GRAD" 0,
+    "opsz" 24;
+}
+
+.nav-btn .label {
+  font-size: 11px;
+}
+
+
+/* 選択中 */
+.nav-btn.active {
+
+  color: var(--member-color1);
+
+  background:
+    color-mix(in srgb,
+      var(--member-color1) 15%,
+      white) !important;
+
+  font-weight: 700;
+}
+
+.nav-btn.active .material-symbols-rounded {
+
+  color: var(--member-color1);
+
+  transform: scale(1.1);
+
+  font-variation-settings:
+    "FILL" 1,
+    "wght" 500,
+    "GRAD" 0,
+    "opsz" 24;
 }
