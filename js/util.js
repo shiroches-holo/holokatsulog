@@ -63,7 +63,8 @@ function getWatchLog(videoId) {
   if (!data) {
     return {
       status: "unwatched",
-      date: null
+      date: null,
+      favorite: false
     };
   }
 
@@ -71,6 +72,7 @@ function getWatchLog(videoId) {
 
 }
 
+// 視聴ログ保存
 function saveWatchLog(videoId, data) {
 
   const key =
@@ -81,4 +83,21 @@ function saveWatchLog(videoId, data) {
     JSON.stringify(data)
   );
 
+}
+
+//　お気に入り
+function isFavorite(videoId) {
+  return getWatchLog(videoId).favorite === true;
+}
+
+function toggleFavorite(videoId) {
+
+  const log = getWatchLog(videoId);
+
+  saveWatchLog(videoId, {
+    ...log,
+    favorite: !log.favorite
+  });
+
+  render();
 }
