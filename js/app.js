@@ -405,13 +405,13 @@ function createPlaylists() {
       document.createElement("label");
 
     label.innerHTML = `
-      <input
-        type="checkbox"
-        value="${p}"
-        checked
-      >
-      ${p} (${playlistCount[p]})
-    `;
+        <input
+          type="checkbox"
+          value="${p}"
+          checked
+        >
+        ${p} (${playlistCount[p]})
+      `;
 
     label
       .querySelector("input")
@@ -551,9 +551,9 @@ function buildMemberList() {
       section.className = "group-section";
 
       section.innerHTML = `
-        <h3>${groupName}</h3>
-        <div class="group-row"></div>
-      `;
+          <h3>${groupName}</h3>
+          <div class="group-row"></div>
+        `;
 
       const row = section.querySelector(".group-row");
 
@@ -592,16 +592,16 @@ function createMemberCard(member) {
   }
 
   div.innerHTML = `
-    <button class="favorite-btn">
-      ${isFav ? "⭐" : "☆"}
-    </button>
+      <button class="favorite-btn">
+        ${isFav ? "⭐" : "☆"}
+      </button>
 
-    <img src="${member.channelIconUrl}">
+      <img src="${member.channelIconUrl}">
 
-    <div class="member-name">
-      ${member.name}${getStatusLabel(member.memberStatus)}
-    </div>
-  `;
+      <div class="member-name">
+        ${member.name}${getStatusLabel(member.memberStatus)}
+      </div>
+    `;
 
   // ✅ クリック
   div.onclick = async () => {
@@ -692,8 +692,8 @@ function applyMemberPreview(member) {
   // 名前先出し
   document.getElementById("memberName").innerHTML =
     `${member.name} 
-     <span class="fanmark">${member.fanMark}</span>
-     ${getStatusLabel(member.memberStatus)}`;
+      <span class="fanmark">${member.fanMark}</span>
+      ${getStatusLabel(member.memberStatus)}`;
 
   /*
   // ファンネーム
@@ -713,13 +713,13 @@ function applyMemberTheme() {
   const header = document.getElementById("appHeader");
 
   header.style.background = `
-    linear-gradient(
-      135deg,
-      ${currentMember.color1},
-      ${currentMember.color2},
-      ${currentMember.color3}
-    )
-  `;
+      linear-gradient(
+        135deg,
+        ${currentMember.color1},
+        ${currentMember.color2},
+        ${currentMember.color3}
+      )
+    `;
 
   // ✅ ここ追加（超重要）
   const root = document.documentElement;
@@ -730,8 +730,8 @@ function applyMemberTheme() {
   // ホロメン名前
   document.getElementById("memberName").innerHTML =
     `${currentMember.name}
-   <span class="fanmark">${currentMember.fanMark}</span>
-   ${getStatusLabel(currentMember.memberStatus)}`;
+    <span class="fanmark">${currentMember.fanMark}</span>
+    ${getStatusLabel(currentMember.memberStatus)}`;
 
   /*
   // ファンネーム
@@ -1081,22 +1081,33 @@ function updateBulkDateState() {
 
 function changeWatchDate(videoId) {
 
+  console.log("changeWatchDate start");
+
   const watchLog =
     getWatchLog(videoId);
 
   if (watchLog.status !== "watched") {
     return;
   }
+
+  console.log("watchLog", watchLog);
+  console.log("watchLog.date", watchLog.date);
+
   const picker =
     document.getElementById(
       "watchDatePicker"
     );
+
+  console.log("picker.type", picker.type);
+  console.log("picker.value(before)", picker.value);
 
   picker.value =
     watchLog.date ||
     new Date()
       .toISOString()
       .slice(0, 10);
+
+  console.log("picker.value(after)", picker.value);
 
   picker.onchange = () => {
 
@@ -1107,20 +1118,32 @@ function changeWatchDate(videoId) {
         date: picker.value
       }
     );
-
+    console.log("picker.type", picker.type);
     render();
   };
 
   console.log("picker", picker);
   console.log("showPicker", typeof picker.showPicker);
-  picker.focus();
+  try {
 
-  if (picker.showPicker) {
-    picker.showPicker();
-  } else {
+    picker.style.top = "100px";
+    picker.style.left = "100px";
+
+    picker.focus();
+
+    if (typeof picker.showPicker === "function") {
+      picker.showPicker();
+    } else {
+      picker.click();
+    }
+
+  } catch (err) {
+
+    console.error("showPicker error:", err);
+
     picker.click();
-  }
 
+  }
 }
 
 
