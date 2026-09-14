@@ -12,10 +12,10 @@ function updateStats(filtered) {
   filtered.forEach(x => {
     totalSec += x.durationSec;
 
-  const watchLog =
-    getWatchLog(x.videoId);
-  
-  if (
+    const watchLog =
+      getWatchLog(x.videoId);
+
+    if (
       ["watched", "realtime"]
         .includes(watchLog.status)
     ) {
@@ -23,7 +23,7 @@ function updateStats(filtered) {
       watchedSec += x.durationSec;
     }
   });
- 
+
   // ✅ 計算は最後 端数切り捨て
   const rate = total
     ? Math.floor((watched / total) * 1000) / 10
@@ -167,14 +167,14 @@ function changeWatchStatus(videoId, status) {
 
   // 視聴済み
   if (status === "watched") {
-  
+
     const oldLog =
       getWatchLog(videoId);
-  
+
     date =
       oldLog.date ||
       item.publishedAt.slice(0, 10);
-  
+
   }
 
   // リアタイ
@@ -186,9 +186,13 @@ function changeWatchStatus(videoId, status) {
 
   }
 
+  const oldLog =
+    getWatchLog(videoId);
+
   saveWatchLog(
     videoId,
     {
+      ...oldLog,
       status,
       date
     }
@@ -198,8 +202,8 @@ function changeWatchStatus(videoId, status) {
     .querySelectorAll(".watch-menu")
     .forEach(menu => {
       menu.classList.add("hidden");
-  });
-  
+    });
+
   render();
 
 }
@@ -257,7 +261,7 @@ function openWatchModalById(videoId) {
 }
 
 function render() {
-   
+
   const playlistCheckboxes = document.querySelectorAll("#playlistFilterArea input");
 
   if (playlistCheckboxes.length === 0) {
@@ -266,7 +270,7 @@ function render() {
 
   const list = document.getElementById("list");
   list.innerHTML = "";
-  
+
   const keyword = document.getElementById("search").value.toLowerCase();
   const status = document.getElementById("filterStatus").value;
   const sort = document.getElementById("sort").value;
@@ -276,16 +280,16 @@ function render() {
       "#playlistFilterArea input:checked"
     )
   ).map(cb => cb.value);
-  
+
   const from =
     document.getElementById("dateFrom").value;
-  
+
   const to =
     document.getElementById("dateTo").value;
-  
+
   const limit =
     document.getElementById("durationLimit").value;
-  
+
   let filtered = window.data.filter(item => {
 
 
@@ -308,11 +312,11 @@ function render() {
     // 視聴状態
     const watchLog =
       getWatchLog(item.videoId);
-    
+
     const watched =
       ["watched", "realtime"]
         .includes(watchLog.status);
-    
+
     if (status === "watched" && !watched) return false;
     if (status === "unwatched" && watched) return false;
 
@@ -333,7 +337,7 @@ function render() {
 
     return true;
   });
-   
+
   // ソート
   if (sort === "new") filtered.sort((a, b) => new Date(b.publishedAt) - new Date(a.publishedAt));
   if (sort === "old") filtered.sort((a, b) => new Date(a.publishedAt) - new Date(b.publishedAt));
@@ -344,7 +348,7 @@ function render() {
 
   // 表示の制限
   // filtered = filtered.slice(0, 100);
-  
+
   // 描画
 
   filtered.forEach(item => {
@@ -355,36 +359,52 @@ function render() {
     const watchLog =
       getWatchLog(item.videoId);
 
+    const favorite =
+      watchLog.favorite === true;
+
     let statusText = "未視聴";
     let statusClass = "status-unwatched";
     let dateText = "";
-    
+
     switch (watchLog.status) {
 
       case "partial":
         statusText = "途中";
         statusClass = "status-partial";
         break;
-        
+
       case "watched":
         statusText = "視聴済み";
         statusClass = "status-watched";
         dateText = watchLog.date || "-";
         break;
-    
+
       case "realtime":
         statusText = "リアタイ";
         statusClass = "status-realtime";
         dateText = watchLog.date || "-";
         break;
-           
-    }   
 
-      card.innerHTML = `
+    }
+
+    card.innerHTML = `
 
           <!-- サムネ -->
           <div class="thumb">
-              <img src="https://img.youtube.com/vi/${item.videoId}/mqdefault.jpg" loading="lazy">
+
+              <button
+                class="video-favorite-btn ${favorite ? "active" : ""}"
+                onclick="
+                  event.stopPropagation();
+                  toggleFavorite('${item.videoId}')
+                ">
+                ${favorite ? "★" : "☆"}
+              </button>
+
+              <img
+                src="https://img.youtube.com/vi/${item.videoId}/mqdefault.jpg"
+                loading="lazy">
+
           </div>
           
           <div class="card-content">
@@ -403,9 +423,9 @@ function render() {
               <!-- 再生リスト -->
               <div class="playlist-text">
                 🎵 ${item.playlistUrl
-              ? `<a href="${item.playlistUrl}" target="_blank">${item.playlistName}</a>`
-              : item.playlistName
-              }
+        ? `<a href="${item.playlistUrl}" target="_blank">${item.playlistName}</a>`
+        : item.playlistName
+      }
               </div>
             
           </div>  
@@ -460,12 +480,12 @@ function render() {
             
           </div>
 
-      `;    
+      `;
 
     list.appendChild(card);
   });
 
   updateStats(filtered);
   updatePlaylistCount();
-  
+
 }
