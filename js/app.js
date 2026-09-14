@@ -592,7 +592,7 @@ function createMemberCard(member) {
   }
 
   div.innerHTML = `
-      <button class="favorite-btn">
+      <button class="member-favorite-btn">
         ${isFav ? "⭐" : "☆"}
       </button>
 
@@ -619,7 +619,7 @@ function createMemberCard(member) {
   };
 
   // ✅ ⭐
-  const btn = div.querySelector(".favorite-btn");
+  const btn = div.querySelector(".member-favorite-btn");
   if (btn) {
     btn.onclick = (e) => {
       e.stopPropagation();
